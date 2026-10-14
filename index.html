@@ -1,0 +1,1334 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ocala Tractor · Proposal by DFT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Brand tokens — swap these to match Ocala Tractor's logo exactly */
+  --red:#C21F26; --red-deep:#9A161C; --red-tint:#FBEAEA;
+  --iron:#1E2226; --iron-2:#2A2F34; --iron-3:#3A4047;
+  --steel:#E9ECEB; --paper:#FFFFFF; --hay:#E7B13F; --pasture:#2F6B45; --pasture-tint:#E6F1EA;
+  --bg:#F4F5F3; --surface:#FFFFFF; --ink:#1E2226; --muted:#5E666D; --line:#DDE1DF;
+  --display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --body:"Barlow","Helvetica Neue",Arial,sans-serif;
+  --r-sm:6px; --r-md:12px; --r-lg:20px;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){ --bg:#15181B; --surface:#1E2226; --ink:#EEF0EF; --muted:#A3ABB1; --line:#323940; --steel:#262B30; --red-tint:#3A1C1E; --pasture-tint:#1B3024; --paper:#1E2226;}
+}
+:root[data-theme="dark"]{ --bg:#15181B; --surface:#1E2226; --ink:#EEF0EF; --muted:#A3ABB1; --line:#323940; --steel:#262B30; --red-tint:#3A1C1E; --pasture-tint:#1B3024; --paper:#1E2226;}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+img,svg{max-width:100%}
+a{color:inherit}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--hay);outline-offset:2px;border-radius:4px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+h1,h2,h3,h4{font-family:var(--display);line-height:.98;margin:0;letter-spacing:-.005em}
+h1{font-size:clamp(48px,8vw,104px);font-weight:800}
+h2{font-size:clamp(36px,5vw,60px);font-weight:800}
+h3{font-size:26px;font-weight:700;line-height:1.05}
+h4{font-size:20px;font-weight:700}
+p{margin:0}
+.lede{font-size:19px;color:var(--muted);max-width:60ch;margin-top:18px}
+.kicker{font-weight:600;color:var(--red);font-size:15px;margin-bottom:12px;display:block}
+.dark .kicker{color:#FF6B6F}
+section.band{padding:96px 0}
+.dark{background:var(--iron);color:#EEF0EF}
+.dark .lede,.dark .muted{color:#A9B1B7}
+.muted{color:var(--muted)}
+.small{font-size:14px}
+.btn{display:inline-flex;align-items:center;gap:10px;border:0;border-radius:999px;padding:14px 24px;font-weight:700;cursor:pointer;text-decoration:none;font-size:16px;transition:transform .15s,background .15s}
+.btn:active{transform:translateY(1px)}
+.btn-red{background:var(--red);color:#fff}
+.btn-red:hover{background:var(--red-deep)}
+.btn-ghost{background:transparent;border:1.5px solid currentColor}
+.btn-light{background:#fff;color:var(--iron)}
+.btn-sm{padding:9px 16px;font-size:14px}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:7px 13px;border-radius:999px;border:1px solid var(--line);background:var(--surface);font-size:14px;font-weight:600;cursor:pointer;color:var(--ink)}
+.chip[aria-pressed="true"],.chip.on{background:var(--iron);color:#fff;border-color:var(--iron)}
+.tag{display:inline-block;font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;background:var(--steel);color:var(--muted)}
+.tag.red{background:var(--red-tint);color:var(--red)}
+.tag.green{background:var(--pasture-tint);color:var(--pasture)}
+.grid{display:grid;gap:20px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:24px}
+.scroll-x{overflow-x:auto}
+/* concept bar */
+.conceptbar{position:fixed;left:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:60;background:var(--iron);color:#fff;border-radius:999px;padding:8px 14px;font-size:13px;display:flex;gap:10px;align-items:center;box-shadow:0 6px 24px rgba(0,0,0,.25)}
+.conceptbar a{color:#fff;font-weight:700}
+.conceptbar .dot{width:8px;height:8px;border-radius:50%;background:var(--red)}
+/* demo nav */
+.demonav{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.demonav .wrap{display:flex;align-items:center;gap:18px;height:58px;overflow-x:auto}
+.demonav .brandmark{font-family:var(--display);font-weight:800;font-size:22px;white-space:nowrap;text-decoration:none}
+.demonav .brandmark span{color:var(--red)}
+.demonav .sub{font-size:13px;color:var(--muted);white-space:nowrap;border-left:1px solid var(--line);padding-left:14px}
+.demonav nav{margin-left:auto;display:flex;gap:4px}
+.demonav nav a{font-size:14px;font-weight:600;text-decoration:none;padding:7px 11px;border-radius:999px;white-space:nowrap}
+.demonav nav a[aria-current="page"]{background:var(--iron);color:#fff}
+.view{display:none}
+.fab[hidden]{display:none}
+.tag{white-space:nowrap;align-self:flex-start;height:max-content}
+.rx .kicker{color:#FF8A8D}
+@media (max-width:600px){.demonav .sub{display:none}}
+.view.active{display:block}
+/* ===== PROPOSAL ===== */
+.p-hero{position:relative;background:var(--iron);color:#fff;overflow:hidden;padding:80px 0 64px}
+.p-hero .road{position:absolute;inset:auto 0 0 0;height:100%;pointer-events:none;opacity:.5}
+.p-hero .prep{font-size:15px;color:#B9C0C5;margin-bottom:28px}
+.p-hero h1{max-width:13ch;font-size:clamp(52px,9vw,116px)}
+.p-hero h1 em{font-style:normal;color:#fff;display:block;-webkit-text-stroke:2px #fff;color:transparent}
+.p-hero .lede{color:#C5CBD0;margin-top:26px}
+.p-hero .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.signs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:64px}
+.sign{background:var(--pasture);border:2px solid #fff;border-radius:8px;padding:14px 16px;color:#fff}
+.sign b{display:block;font-family:var(--display);font-size:38px;font-weight:800;line-height:1}
+.sign span{font-size:14px;color:#DDEBE1}
+.sign.red{background:var(--red)}
+.sign.red span{color:#FFE0E0}
+@media (max-width:760px){.signs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.note{display:grid;grid-template-columns:200px 1fr;gap:32px;align-items:start}
+.note blockquote{margin:0;font-size:clamp(21px,2.4vw,27px);line-height:1.38;font-weight:500;max-width:52ch}
+.note blockquote strong{color:var(--red);font-weight:600}
+.note .sig{margin-top:18px;font-size:15px;color:var(--muted)}
+@media (max-width:760px){.note{grid-template-columns:1fr;gap:8px}}
+.findings{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:40px}
+.finding{border-top:4px solid var(--red);padding-top:16px}
+.finding h4{margin-bottom:8px}
+@media (max-width:860px){.findings{grid-template-columns:1fr}}
+.journey{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:40px;counter-reset:j}
+.jstep{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:20px;position:relative}
+.jstep .n{font-family:var(--display);font-weight:800;font-size:15px;color:var(--red)}
+.jstep h4{margin:6px 0 8px}
+.jstep p{font-size:15px;color:var(--muted)}
+.jstep .links{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+@media (max-width:900px){.journey{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.journey{grid-template-columns:1fr}}
+.storeband{margin-top:24px;background:var(--iron);color:#fff;border-radius:var(--r-lg);padding:32px;display:grid;grid-template-columns:1.1fr 1fr;gap:28px;align-items:center}
+.storeband .routes{display:grid;gap:10px}
+.route{display:flex;align-items:center;gap:12px;background:var(--iron-2);border-radius:10px;padding:12px 14px}
+.route .pin{width:36px;height:36px;border-radius:8px;background:var(--red);display:grid;place-items:center;font-family:var(--display);font-weight:800}
+.route b{display:block}
+.route small{color:#A9B1B7}
+@media (max-width:820px){.storeband{grid-template-columns:1fr}}
+.demos{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:20px;margin-top:40px}
+.demo{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;display:flex;flex-direction:column;text-decoration:none}
+.demo:hover .open{text-decoration:underline}
+.demo .shot{background:var(--steel);height:230px;position:relative;overflow:hidden}
+.demo .body{padding:20px 22px 24px}
+.demo .num{font-family:var(--display);font-weight:700;color:var(--red);font-size:15px}
+.demo h3{margin:4px 0 8px}
+.demo p{color:var(--muted);font-size:15px}
+.demo .open{display:inline-block;margin-top:14px;font-weight:700;color:var(--red)}
+.d-a{grid-column:span 4}.d-b{grid-column:span 2}.d-c{grid-column:span 3}.d-d{grid-column:span 3}.d-e{grid-column:span 3}.d-f{grid-column:span 3}
+@media (max-width:860px){.demos{grid-template-columns:1fr}.demos>*{grid-column:auto!important}}
+.mini-site{position:absolute;inset:22px 22px auto 22px;height:260px;background:#fff;border-radius:10px 10px 0 0;box-shadow:0 10px 30px rgba(0,0,0,.15);overflow:hidden}
+.mini-site .top{height:26px;background:var(--iron);display:flex;align-items:center;padding:0 10px;gap:6px}
+.mini-site .top i{width:7px;height:7px;border-radius:50%;background:#555}
+.mini-site .hero{height:120px;background:linear-gradient(120deg,var(--iron) 55%,var(--red) 55.2%);padding:16px;color:#fff;font-family:var(--display);font-weight:800;font-size:26px;line-height:.95}
+.mini-site .bubble{position:absolute;right:12px;bottom:46px;background:var(--red);color:#fff;font-size:12px;font-weight:700;padding:7px 12px;border-radius:999px}
+.mini-site .cards{display:flex;gap:8px;padding:10px}
+.mini-site .cards i{flex:1;height:50px;background:var(--steel);border-radius:6px}
+.mini-phone{position:absolute;left:50%;top:22px;transform:translateX(-50%);width:150px;height:260px;background:var(--iron);border-radius:24px;padding:8px}
+.mini-phone .scr{background:#fff;border-radius:17px;height:100%;padding:12px 9px;display:grid;gap:7px;align-content:start}
+.mini-phone .b{height:26px;border-radius:7px;background:var(--steel)}
+.mini-phone .b.r{background:var(--red-tint);border-left:3px solid var(--red)}
+.mini-phone .b.g{background:var(--pasture-tint);border-left:3px solid var(--pasture)}
+.mini-chat{position:absolute;inset:0;background:var(--iron);padding:26px;display:flex;flex-direction:column;gap:10px;justify-content:center}
+.mini-chat .m{max-width:78%;padding:10px 13px;border-radius:14px;font-size:14px;line-height:1.35}
+.mini-chat .in{background:var(--iron-3);color:#fff}
+.mini-chat .out{background:var(--red);color:#fff;align-self:flex-end}
+.mini-dash{position:absolute;inset:22px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mini-dash div{background:#fff;border-radius:10px;padding:12px;box-shadow:0 4px 14px rgba(0,0,0,.06)}
+.mini-dash small{display:block;font-size:11px;color:#5E666D;font-weight:600}
+.mini-dash b{font-family:var(--display);font-size:30px;color:#1E2226}
+.mini-dash s{color:#9AA1A6;font-size:15px;margin-right:6px}
+.mini-cal{position:absolute;inset:22px;display:flex;gap:10px;align-items:flex-end;justify-content:center}
+.mini-cal .bar{width:34px;border-radius:6px 6px 0 0}
+.calc{display:grid;grid-template-columns:1.05fr .95fr;gap:20px;margin-top:40px;align-items:start}
+@media (max-width:900px){.calc{grid-template-columns:1fr}}
+.calc-out{background:var(--iron);color:#fff;border-radius:var(--r-lg);padding:30px}
+.calc-out .big{font-family:var(--display);font-weight:800;font-size:clamp(56px,8vw,88px);line-height:.95;margin:8px 0}
+.calc-out .row{display:grid;grid-template-columns:30px 1fr auto;gap:12px;padding:14px 0;border-top:1px solid var(--iron-3);align-items:start}
+.calc-out .row .i{width:26px;height:26px;border-radius:50%;background:var(--red);display:grid;place-items:center;font-size:13px;font-weight:700}
+.calc-out .row small{display:block;color:#A9B1B7;font-size:13px}
+.calc-out .row b{font-family:var(--display);font-size:24px}
+.calc-in{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:26px}
+.slider{margin-bottom:18px}
+.slider label{display:flex;justify-content:space-between;font-weight:600;font-size:15px}
+.slider label output{color:var(--red);font-weight:700}
+input[type=range]{width:100%;accent-color:var(--red);margin-top:6px}
+.timeline{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;margin-top:40px}
+.tl{border-top:3px solid var(--red);padding-top:14px}
+.tl .w{font-family:var(--display);font-weight:800;font-size:28px}
+.tl p{font-size:15px;color:var(--muted);margin-top:4px}
+@media (max-width:820px){.timeline{grid-template-columns:1fr 1fr}}
+.team{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:32px}
+.team .panel b{display:block;font-family:var(--display);font-size:30px;font-weight:800;line-height:1.05;margin-bottom:6px}
+.team .panel span{font-size:14px;color:var(--muted)}
+@media (max-width:820px){.team{grid-template-columns:1fr 1fr}}
+.pc-banner{margin-top:40px;background:var(--red);color:#fff;border-radius:var(--r-lg);padding:28px 32px;display:flex;gap:20px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.close{background:var(--red);color:#fff;border-radius:var(--r-lg);padding:44px;display:grid;grid-template-columns:1.3fr 1fr;gap:30px;align-items:center}
+.close ul{margin:14px 0 0;padding-left:20px}
+.close li{margin:4px 0}
+@media (max-width:820px){.close{grid-template-columns:1fr;padding:30px}}
+.footlinks{display:flex;flex-wrap:wrap;gap:16px;margin-top:40px;font-weight:600;font-size:15px}
+.fine{font-size:13px;color:var(--muted);margin-top:12px;max-width:90ch}
+/* ===== SITE DEMO ===== */
+.s-util{background:var(--iron);color:#D3D8DC;font-size:13px}
+.s-util .wrap{display:flex;gap:18px;justify-content:space-between;align-items:center;height:36px;overflow-x:auto;white-space:nowrap}
+.s-util b{color:#fff}
+.s-head{background:var(--surface);border-bottom:1px solid var(--line)}
+.s-head .wrap{display:flex;align-items:center;gap:22px;height:72px}
+.s-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.s-logo .mark{width:42px;height:42px;border-radius:8px;background:var(--red);display:grid;place-items:center}
+.s-logo b{font-family:var(--display);font-weight:800;font-size:24px;line-height:.9;display:block}
+.s-logo small{font-size:12px;color:var(--muted);font-weight:600}
+.s-head nav{display:flex;gap:18px;font-weight:600;font-size:15px}
+.s-head nav a{text-decoration:none}
+.s-head .right{margin-left:auto;display:flex;gap:10px;align-items:center}
+.storepick{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:9px 14px;font-weight:600;font-size:14px}
+@media (max-width:900px){.s-head nav{display:none}}
+.s-hero{position:relative;background:var(--iron);color:#fff;overflow:hidden}
+.s-hero .wrap{position:relative;padding:72px 24px 150px}
+.s-hero h1{font-size:clamp(50px,8vw,96px);max-width:12ch}
+.s-hero .lede{color:#C5CBD0}
+.s-hero .stripe{position:absolute;right:-8%;top:0;bottom:0;width:48%;background:var(--red);transform:skewX(-14deg);transform-origin:top}
+.s-hero .tractor{position:absolute;right:5%;bottom:120px;width:min(520px,52%);color:#fff}
+@media (max-width:760px){.s-hero .stripe,.s-hero .tractor{display:none}}
+.finder{position:relative;margin:-96px auto 0;max-width:1072px;background:var(--surface);border-radius:var(--r-lg);box-shadow:0 20px 50px rgba(0,0,0,.18);padding:24px;z-index:2}
+.finder .tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.finder .row{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:10px}
+.finder select,.finder input{width:100%;padding:13px 14px;border:1px solid var(--line);border-radius:10px;background:var(--bg)}
+@media (max-width:760px){.finder .row{grid-template-columns:1fr}}
+.trust{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:28px auto 0}
+.trust div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:14px}
+.trust b{display:block;font-size:16px}
+@media (max-width:760px){.trust{grid-template-columns:1fr 1fr}}
+.inv{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:32px}
+@media (max-width:900px){.inv{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.inv{grid-template-columns:1fr}}
+.unit{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden;display:flex;flex-direction:column}
+.unit .pic{aspect-ratio:16/10;background:var(--steel);display:grid;place-items:center;color:var(--iron-3);position:relative}
+.unit .pic .loc{position:absolute;left:10px;top:10px}
+.unit .b{padding:16px 18px 18px;display:flex;flex-direction:column;flex:1}
+.unit .mk{font-size:13px;font-weight:700;color:var(--muted)}
+.unit h4{margin:2px 0 6px;font-size:22px}
+.unit .pkg{font-size:14px;color:var(--muted)}
+.unit .price{display:flex;align-items:baseline;gap:8px;margin:12px 0 14px}
+.unit .price b{font-family:var(--display);font-size:30px}
+.unit .price s{color:var(--muted);font-size:14px}
+.unit .acts{margin-top:auto;display:flex;gap:8px;flex-wrap:wrap}
+.services{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:32px}
+.svc{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:22px}
+.svc h4{margin:10px 0 6px}
+.svc p{font-size:15px;color:var(--muted)}
+.svc button{margin-top:14px}
+@media (max-width:900px){.services{grid-template-columns:1fr 1fr}}
+.stores{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:32px}
+.store{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:22px}
+.store h4{font-size:24px}
+.store .who{display:flex;gap:10px;align-items:center;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+.avatar{width:38px;height:38px;border-radius:50%;background:var(--iron);color:#fff;display:grid;place-items:center;font-weight:700;font-size:14px;flex:none}
+@media (max-width:820px){.stores{grid-template-columns:1fr}}
+.s-foot{background:var(--iron);color:#C5CBD0;padding:56px 0 90px;margin-top:80px}
+.s-foot .cols{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:24px}
+.s-foot h4{color:#fff;font-size:17px;margin-bottom:10px;font-family:var(--body)}
+.s-foot a{display:block;text-decoration:none;font-size:15px;margin:4px 0}
+@media (max-width:820px){.s-foot .cols{grid-template-columns:1fr 1fr}}
+/* chat bubble + panel */
+.fab{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:70;background:var(--red);color:#fff;border:0;border-radius:999px;padding:12px 18px 12px 12px;display:flex;gap:10px;align-items:center;box-shadow:0 10px 30px rgba(194,31,38,.4);cursor:pointer;text-align:left}
+.fab .ic{width:34px;height:34px;border-radius:50%;background:#fff;color:var(--red);display:grid;place-items:center;position:relative}
+.fab .ic::after{content:"";position:absolute;right:-1px;bottom:-1px;width:10px;height:10px;border-radius:50%;background:#3BC46A;border:2px solid var(--red)}
+.fab b{display:block;font-size:15px;line-height:1.1}
+.fab small{font-size:12px;opacity:.9}
+.chatpanel{position:fixed;right:18px;bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:71;width:min(380px,calc(100vw - 36px));height:min(560px,calc(100vh - 140px));background:var(--surface);border-radius:18px;box-shadow:0 24px 60px rgba(0,0,0,.3);display:none;flex-direction:column;overflow:hidden;border:1px solid var(--line)}
+.chatpanel.open{display:flex}
+.chathead{background:var(--iron);color:#fff;padding:14px 16px;display:flex;align-items:center;gap:10px}
+.chathead small{display:block;color:#A9B1B7;font-size:12px}
+.chathead button{margin-left:auto;background:none;border:0;color:#fff;font-size:22px;cursor:pointer;line-height:1}
+.msgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:8px;background:var(--bg)}
+.msg{max-width:84%;padding:10px 13px;border-radius:14px;font-size:15px;line-height:1.4;white-space:pre-wrap}
+.msg.bot{background:var(--surface);border:1px solid var(--line);border-bottom-left-radius:4px}
+.msg.me{background:var(--red);color:#fff;align-self:flex-end;border-bottom-right-radius:4px}
+.msg.sys{align-self:center;background:var(--pasture-tint);color:var(--pasture);font-size:13px;font-weight:600;border-radius:999px;padding:6px 12px;max-width:95%;text-align:center}
+.typing{display:inline-flex;gap:4px}.typing i{width:6px;height:6px;border-radius:50%;background:var(--muted);animation:blink 1s infinite}.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes blink{0%,100%{opacity:.25}50%{opacity:1}}
+.quick{display:flex;gap:6px;overflow-x:auto;padding:8px 12px;border-top:1px solid var(--line);background:var(--surface)}
+.quick .chip{white-space:nowrap;font-size:13px;padding:6px 11px}
+.composer{display:flex;gap:8px;padding:10px 12px;border-top:1px solid var(--line);background:var(--surface)}
+.composer input{flex:1;border:1px solid var(--line);border-radius:999px;padding:10px 14px;background:var(--bg)}
+.composer button{border:0;background:var(--red);color:#fff;border-radius:50%;width:42px;height:42px;cursor:pointer;flex:none}
+/* booking modal */
+.modal{position:fixed;inset:0;background:rgba(15,17,19,.6);z-index:80;display:none;place-items:center;padding:20px}
+.modal.open{display:grid}
+.sheet{background:var(--surface);border-radius:var(--r-lg);width:min(560px,100%);max-height:calc(100vh - 40px);overflow-y:auto;padding:26px}
+.sheet .head{display:flex;justify-content:space-between;align-items:start;gap:10px}
+.sheet .x{background:none;border:0;font-size:26px;cursor:pointer;line-height:1;color:var(--muted)}
+.days{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin:18px 0 12px}
+.day{border:1px solid var(--line);border-radius:10px;padding:10px 4px;text-align:center;cursor:pointer;background:var(--surface)}
+.day b{display:block;font-family:var(--display);font-size:24px;line-height:1}
+.day small{font-size:12px;color:var(--muted);font-weight:600}
+.day[aria-pressed="true"]{border-color:var(--red);background:var(--red-tint)}
+.slots{display:flex;flex-wrap:wrap;gap:8px}
+.field{display:grid;gap:6px;margin-top:14px}
+.field label{font-weight:600;font-size:14px}
+.field input,.field select{padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:var(--bg)}
+.confirm{text-align:center;padding:12px 0}
+.confirm .check{width:64px;height:64px;border-radius:50%;background:var(--pasture);color:#fff;display:grid;place-items:center;margin:0 auto 14px;font-size:32px}
+.receipt{background:var(--bg);border-radius:12px;padding:14px 16px;text-align:left;margin-top:16px;font-size:14px;display:grid;gap:6px}
+.receipt div{display:flex;justify-content:space-between;gap:10px}
+.receipt span{color:var(--muted)}
+/* ===== RECEPTIONIST ===== */
+.rx{background:var(--iron);color:#EEF0EF;min-height:calc(100vh - 58px);padding:48px 0 90px}
+.rx .layout{display:grid;grid-template-columns:1fr 360px 1fr;gap:28px;align-items:start}
+@media (max-width:1060px){.rx .layout{grid-template-columns:1fr;max-width:560px;margin:0 auto}}
+.rx h1{font-size:clamp(40px,4.4vw,58px)}
+.rx h1 .t{color:#FF6B6F}
+.rx .lede{color:#B9C0C5;font-size:17px}
+.rx .lede b{color:#fff}
+.tries{display:grid;gap:8px;margin-top:22px}
+.try{background:var(--iron-2);border:1px solid var(--iron-3);border-radius:10px;color:#E5E8EA;padding:11px 14px;text-align:left;cursor:pointer;font-size:15px}
+.try:hover{border-color:#FF6B6F}
+.try small{display:block;color:#8F989F;font-size:12px;margin-top:2px}
+.mode{display:flex;justify-content:center;gap:4px;background:var(--iron-2);border-radius:999px;padding:4px;width:max-content;margin:0 auto 14px}
+.mode button{border:0;background:none;color:#C5CBD0;padding:8px 16px;border-radius:999px;font-weight:600;cursor:pointer}
+.mode button[aria-pressed="true"]{background:#fff;color:var(--iron)}
+.phone{background:#0E1012;border-radius:44px;padding:12px;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.phone .screen{background:var(--bg);color:var(--ink);border-radius:34px;height:620px;display:flex;flex-direction:column;overflow:hidden}
+.phone .status{display:flex;justify-content:space-between;padding:12px 22px 4px;font-size:13px;font-weight:700}
+.phone .who{text-align:center;padding:4px 0 10px;border-bottom:1px solid var(--line);background:var(--surface)}
+.phone .who .mk{width:40px;height:40px;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center;margin:0 auto 4px;font-family:var(--display);font-weight:800}
+.phone .who small{color:var(--pasture);font-size:12px;font-weight:600}
+.callview{flex:1;display:none;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:20px;text-align:center;background:linear-gradient(var(--iron),#000);color:#fff}
+.callview.on{display:flex}
+.callview .orb{width:120px;height:120px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#FF8A8D,var(--red) 60%,var(--red-deep));box-shadow:0 0 0 0 rgba(194,31,38,.5)}
+.callview .orb.talk{animation:pulse 1.4s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,107,111,.55)}100%{box-shadow:0 0 0 34px rgba(255,107,111,0)}}
+.callview .cap{font-size:15px;color:#D3D8DC;min-height:66px;max-width:260px}
+.mic{width:66px;height:66px;border-radius:50%;border:0;background:#fff;color:var(--iron);cursor:pointer;font-weight:700}
+.mic.rec{background:var(--red);color:#fff}
+.rx .cap-note{font-size:12px;color:#8F989F;text-align:center;margin-top:10px}
+.crmcard{background:var(--surface);color:var(--ink);border-radius:16px;overflow:hidden}
+.crmcard .h{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);font-weight:700;font-size:14px}
+.crmcard .h .pd{width:22px;height:22px;border-radius:6px;background:#1A1A1A;color:#fff;display:grid;place-items:center;font-size:12px;font-weight:800}
+.crmcard .h small{margin-left:auto;color:var(--muted);font-weight:600}
+.deals{padding:12px;display:grid;gap:10px;min-height:150px}
+.empty{color:var(--muted);text-align:center;padding:26px 10px;font-size:14px}
+.deal{border:1px solid var(--line);border-left:4px solid var(--red);border-radius:10px;padding:12px 14px;background:var(--bg);animation:drop .45s ease-out}
+@keyframes drop{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:none}}
+.deal .t{font-weight:700}
+.deal dl{display:grid;grid-template-columns:auto 1fr;gap:3px 12px;margin:8px 0 0;font-size:13px}
+.deal dt{color:var(--muted)}
+.deal dd{margin:0;font-weight:600}
+.does{background:var(--iron-2);border:1px solid var(--iron-3);border-radius:16px;padding:18px;margin-top:16px}
+.does .it{display:grid;grid-template-columns:30px 1fr;gap:10px;padding:8px 0}
+.does .it i{width:28px;height:28px;border-radius:8px;background:var(--iron-3);display:grid;place-items:center;font-style:normal;color:#FF6B6F;font-size:14px}
+.does b{display:block;font-size:15px}
+.does small{color:#A9B1B7;font-size:13px}
+/* ===== CRM TOUR ===== */
+.crm{padding:48px 0 90px;min-height:calc(100vh - 58px)}
+.crm .layout{display:grid;grid-template-columns:380px 1fr;gap:56px;align-items:center}
+@media (max-width:900px){.crm .layout{grid-template-columns:1fr;justify-items:center}}
+.pdphone{width:340px;background:#0E1012;border-radius:46px;padding:12px;box-shadow:0 30px 70px rgba(0,0,0,.28);position:relative}
+.pdphone .screen{background:#F7F8F7;color:#1E2226;border-radius:36px;height:660px;overflow:hidden;display:flex;flex-direction:column;position:relative}
+.pdtop{padding:14px 20px 10px;display:flex;justify-content:space-between;font-size:13px;font-weight:700}
+.pdbody{flex:1;overflow-y:auto;padding:4px 16px 16px}
+.pdtab{display:flex;justify-content:space-around;border-top:1px solid #DDE1DF;padding:10px 0 14px;font-size:11px;font-weight:600;color:#7A8288;background:#fff}
+.pdtab span.on{color:var(--red)}
+.push{position:absolute;left:10px;right:10px;top:10px;background:rgba(255,255,255,.97);border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.2);padding:12px 14px;font-size:13px;transform:translateY(-140%);transition:transform .4s;z-index:3}
+.push.show{transform:none}
+.push b{display:block}
+.pcard{background:#fff;border:1px solid #DDE1DF;border-radius:14px;padding:14px;margin-top:10px}
+.pcard h5{margin:0;font-size:15px}
+.pcard .meta{font-size:12px;color:#5E666D;margin-top:2px}
+.pill{display:inline-block;font-size:11px;font-weight:700;padding:3px 8px;border-radius:999px;background:#E9ECEB;color:#5E666D;margin-right:4px}
+.pill.r{background:#FBEAEA;color:#C21F26}.pill.g{background:#E6F1EA;color:#2F6B45}.pill.y{background:#FCF1D8;color:#8A6411}
+.greet{font-family:var(--display);font-size:28px;font-weight:800;line-height:1;margin:6px 0 2px}
+.seq{display:grid;gap:8px;margin-top:10px}
+.seq .s{display:grid;grid-template-columns:22px 1fr auto;gap:8px;align-items:start;font-size:13px}
+.seq .s i{width:20px;height:20px;border-radius:50%;background:#2F6B45;color:#fff;display:grid;place-items:center;font-size:11px;font-style:normal}
+.seq .s i.p{background:#DDE1DF;color:#5E666D}
+.bubble-in{background:#E9ECEB;border-radius:12px;padding:8px 10px;font-size:13px;margin-top:6px}
+.bubble-out{background:#C21F26;color:#fff;border-radius:12px;padding:8px 10px;font-size:13px;margin:6px 0 0 30px}
+.storecols{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px}
+.storecols div{background:#fff;border:1px solid #DDE1DF;border-radius:10px;padding:8px;text-align:center}
+.storecols b{display:block;font-family:var(--display);font-size:24px}
+.storecols small{font-size:11px;color:#5E666D}
+.crm .step{font-family:var(--display);font-weight:700;color:var(--red);font-size:16px}
+.crm h2{font-size:clamp(40px,5vw,58px);margin:4px 0 10px}
+.why{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--red);border-radius:12px;padding:14px 16px;margin-top:18px;max-width:52ch}
+.why b{display:block;color:var(--red);font-size:14px;margin-bottom:2px}
+.jump{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px;max-width:560px}
+.crm .ctrl{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+/* ===== DASHBOARD ===== */
+.dash{padding:40px 0 90px}
+.dash .top{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap}
+.toggle{display:flex;background:var(--steel);border-radius:999px;padding:4px;gap:4px}
+.toggle button{border:0;background:none;padding:9px 16px;border-radius:999px;font-weight:700;cursor:pointer;color:var(--muted)}
+.toggle button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.banner{border-radius:12px;padding:12px 16px;font-size:14px;font-weight:600;background:var(--steel);color:var(--muted);margin-top:16px;max-width:520px}
+.banner.t{background:var(--red-tint);color:var(--red)}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:24px}
+@media (max-width:900px){.kpis{grid-template-columns:1fr 1fr}}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.kpi .lab{display:flex;justify-content:space-between;gap:8px;font-size:14px;font-weight:600;color:var(--muted)}
+.kpi .val{font-family:var(--display);font-weight:800;font-size:40px;line-height:1.05;margin-top:8px}
+.kpi.tgt .val{color:var(--red)}
+.kpi .sub{font-size:13px;color:var(--muted)}
+.kpi .bar{height:5px;border-radius:5px;background:var(--steel);margin-top:12px;overflow:hidden}
+.kpi .bar i{display:block;height:100%;background:var(--muted);transition:width .6s}
+.kpi.tgt .bar i{background:var(--red)}
+.tbl{width:100%;border-collapse:collapse;font-size:15px;min-width:640px}
+.tbl th{text-align:left;font-size:13px;color:var(--muted);font-weight:600;padding:10px 8px;border-bottom:1px solid var(--line)}
+.tbl td{padding:12px 8px;border-bottom:1px solid var(--line);vertical-align:middle}
+.tbl td small{display:block;color:var(--muted);font-size:13px}
+.track{position:relative;height:8px;background:var(--steel);border-radius:8px;min-width:180px}
+.track .zone{position:absolute;left:0;top:0;bottom:0;width:18%;background:var(--pasture-tint);border-radius:8px}
+.track .dot{position:absolute;top:50%;width:14px;height:14px;border-radius:50%;transform:translate(-50%,-50%);background:var(--muted);border:2px solid var(--surface);transition:left .6s}
+.track .dot.t{background:var(--red)}
+.charts{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:16px}
+.two{display:grid;grid-template-columns:1.3fr 1fr;gap:16px;margin-top:16px}
+@media (max-width:900px){.charts,.three,.two{grid-template-columns:1fr}}
+.log .e{display:grid;grid-template-columns:62px 1fr auto;gap:12px;padding:11px 0;border-bottom:1px solid var(--line);font-size:14px}
+.log .e .d{color:var(--muted);font-weight:600}
+.log .e b{display:block;font-size:15px}
+.score .e{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px solid var(--line);font-size:14px}
+.score .e b{display:block;font-size:15px}
+.shop .e{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border:1px solid var(--line);border-radius:10px;margin-top:8px;font-size:14px}
+/* ===== PAST CUSTOMERS ===== */
+.pc{padding:48px 0 90px}
+.pc h1{font-size:clamp(48px,7vw,88px);max-width:14ch}
+.pc .calcrow{display:grid;grid-template-columns:1fr 1.15fr;gap:20px;margin-top:32px}
+@media (max-width:900px){.pc .calcrow{grid-template-columns:1fr}}
+.seg{display:flex;background:var(--steel);border-radius:999px;padding:4px;gap:4px;margin-top:6px}
+.seg button{flex:1;border:0;background:none;padding:9px;border-radius:999px;font-weight:700;cursor:pointer;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--iron);color:#fff}
+.stack{display:flex;height:14px;border-radius:7px;overflow:hidden;margin-top:22px;background:var(--iron-3)}
+.stack i{display:block;height:100%;transition:width .4s}
+.legend{display:flex;flex-wrap:wrap;gap:12px;margin-top:10px;font-size:13px;color:#C5CBD0}
+.legend span{display:inline-flex;gap:6px;align-items:center}
+.legend span i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.camps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;margin-top:28px}
+@media (max-width:1000px){.camps{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.camps{grid-template-columns:1fr}}
+.camp{background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+.camp.off{opacity:.55}
+.camp .ph{background:var(--iron);padding:18px 14px;min-height:190px}
+.camp .notif{background:#fff;color:#1E2226;border-radius:12px;padding:10px 12px;font-size:13px;line-height:1.35}
+.camp .notif small{display:block;color:#5E666D;font-weight:700;font-size:11px;margin-bottom:3px}
+.camp .notif .b{display:inline-block;margin-top:7px;background:var(--red);color:#fff;border-radius:999px;padding:3px 10px;font-weight:700;font-size:12px}
+.camp .bd{padding:14px 16px;display:flex;flex-direction:column;flex:1}
+.camp h4{font-size:19px;margin:4px 0}
+.camp .freq{font-size:13px;color:var(--muted)}
+.camp .ft{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:14px}
+.camp .ft b{font-family:var(--display);font-size:26px;color:var(--pasture)}
+.sw{width:46px;height:26px;border-radius:999px;background:var(--pasture);border:0;position:relative;cursor:pointer;flex:none}
+.sw::after{content:"";position:absolute;top:3px;left:23px;width:20px;height:20px;border-radius:50%;background:#fff;transition:left .2s}
+.sw[aria-checked="false"]{background:var(--line)}
+.sw[aria-checked="false"]::after{left:3px}
+.steps4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));background:var(--surface);border:1px solid var(--line);border-radius:16px;margin-top:28px}
+.steps4>div{padding:22px;text-align:center;border-right:1px solid var(--line)}
+.steps4>div:last-child{border-right:0}
+.steps4 h4{margin:8px 0 6px}
+.steps4 p{font-size:14px;color:var(--muted)}
+@media (max-width:820px){.steps4{grid-template-columns:1fr 1fr}.steps4>div{border-bottom:1px solid var(--line)}}
+.vs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:28px}
+.vs>div{background:var(--iron-2);border-radius:14px;padding:20px}
+.vs>div.us{background:#fff;color:var(--iron)}
+.vs ul{list-style:none;padding:0;margin:12px 0 0}
+.vs li{padding:7px 0;border-top:1px solid var(--iron-3);font-size:15px}
+.vs .us li{border-color:#DDE1DF}
+.vs li::before{content:"✕ ";color:#FF6B6F;font-weight:700}
+.vs .us li::before{content:"✓ ";color:var(--pasture)}
+@media (max-width:820px){.vs{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="tractor" viewBox="0 0 240 150">
+    <path fill="currentColor" d="M70 30h50l10 38h46l6-20h14l-6 22c18 4 30 16 34 32h8v14h-18c-4-14-17-24-32-24s-28 10-32 24H96c-1-26-22-46-48-46-6 0-12 1-17 3l7-25h32zm10 10-6 26h48l-8-26z"/>
+    <circle cx="48" cy="112" r="34" fill="currentColor"/><circle cx="48" cy="112" r="15" fill="var(--hub,#1E2226)"/>
+    <circle cx="186" cy="124" r="22" fill="currentColor"/><circle cx="186" cy="124" r="9" fill="var(--hub,#1E2226)"/>
+    <rect x="150" y="24" width="7" height="44" rx="3" fill="currentColor"/>
+  </symbol>
+  <symbol id="mower" viewBox="0 0 240 150">
+    <path fill="currentColor" d="M40 78h120l24-26h20l-20 34v14H40zm44-40h44l8 32H76z"/>
+    <circle cx="70" cy="114" r="22" fill="currentColor"/><circle cx="70" cy="114" r="9" fill="var(--hub,#1E2226)"/>
+    <circle cx="176" cy="120" r="16" fill="currentColor"/><circle cx="176" cy="120" r="6" fill="var(--hub,#1E2226)"/>
+  </symbol>
+</svg>
+
+<header class="demonav" id="demonav">
+  <div class="wrap">
+    <a class="brandmark" href="#/proposal">Ocala <span>Tractor</span></a>
+    <span class="sub" id="navsub">Proposal by DFT</span>
+    <nav aria-label="Demos">
+      <a href="#/proposal">Proposal</a>
+      <a href="#/site">Website</a>
+      <a href="#/receptionist">AI receptionist</a>
+      <a href="#/crm">Sales follow-up</a>
+      <a href="#/dashboard">90-day results</a>
+      <a href="#/past-customers">Past customers</a>
+    </nav>
+  </div>
+</header>
+
+<div class="conceptbar" id="conceptbar"><span class="dot"></span>Concept by DFT for Ocala Tractor <a href="#/proposal">Back to proposal</a></div>
+
+<!-- ================= PROPOSAL ================= -->
+<main class="view" id="v-proposal">
+  <section class="p-hero">
+    <svg class="road" viewBox="0 0 1200 600" preserveAspectRatio="none" aria-hidden="true"><path d="M760 600 L980 0 L1010 0 L1200 600Z" fill="#2A2F34"/><path d="M985 600 L996 0" stroke="#E7B13F" stroke-width="5" stroke-dasharray="36 30"/></svg>
+    <div class="wrap" style="position:relative">
+      <p class="prep">Prepared for the Ocala Tractor team, October 2026</p>
+      <h1>Three stores. One phone line. <em>Every buyer answered.</em></h1>
+      <p class="lede">Live chat, online booking, an AI receptionist that picks up at 6pm on a Saturday, and a sales pipeline that follows up for your team. All of it built on your inventory, your stores and your people, and all of it clickable today.</p>
+      <div class="ctas">
+        <a class="btn btn-red" href="#demos">See what we built</a>
+        <a class="btn btn-ghost" href="#/receptionist">Talk to the receptionist</a>
+      </div>
+      <div class="signs">
+        <div class="sign"><b>6</b><span>working demos on this page</span></div>
+        <div class="sign"><b>3</b><span>stores routed to the right person</span></div>
+        <div class="sign"><b>30 days</b><span>to have it live</span></div>
+        <div class="sign red"><b>0</b><span>changes to your Dealer Spike website</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap note">
+      <span class="kicker">A note first</span>
+      <div>
+        <blockquote>You've grown a family business into three stores across Marion, Putnam and Lake County, with a lot full of TYM, Gravely, Massey Ferguson, Solis and Bad Boy. The hard part is done. What's missing is <strong>an answer for the buyer who calls at 6pm, chats at 9pm, or asks about a Solis on Sunday</strong>, and a follow-up that happens without someone remembering to make it. So instead of a pitch deck, we built it.</blockquote>
+        <p class="sig">Rifat Habib, Director of Business Development &amp; Strategy, DFT</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" style="padding-top:0">
+    <div class="wrap">
+      <span class="kicker">What we found on ocalatractor.com</span>
+      <h2>Great inventory. The doors close at 5.</h2>
+      <p class="lede">We went through your site, inventory and listings the way a buyer would. The equipment and pricing are strong. The gaps are all in what happens after someone raises a hand.</p>
+      <div class="findings">
+        <div class="finding"><h4>Every request waits for a callback</h4><p class="muted">Schedule Demo, Service Appointments, Parts Request and Value Your Trade are all forms. Nothing books a real time, so the buyer waits until someone is back at a desk.</p></div>
+        <div class="finding"><h4>No one answers after hours</h4><p class="muted">Your Ocala store lists 8am to 5pm, Monday to Friday. Hobby farmers and weekend property owners shop evenings and Saturdays, and there's no chat or text option on the site.</p></div>
+        <div class="finding"><h4>Three stores, one front door</h4><p class="muted">Ocala, Palatka and Eustis each have their own sales and finance people, but online leads arrive in one place. Palatka buyers shouldn't wait on the Ocala inbox.</p></div>
+        <div class="finding"><h4>Package deals with no next step</h4><p class="muted">"The Weekend Rancher," "Honey, I Dug a Hole," "The Money Maker": your packages are some of the best-named in Florida. None of them have a "book a demo ride" button.</p></div>
+        <div class="finding"><h4>Rentals that never become sales</h4><p class="muted">You rent the TYM T130 from $650 a day. A customer who rents twice is a buyer, but nothing flags them or makes the offer.</p></div>
+        <div class="finding"><h4>Search details are out of date</h4><p class="muted">Your page description still lists Rhino AG and Bobcat, and the Eustis map link points to "Lake City." Small, but it's what Google reads first.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" style="background:var(--steel)">
+    <div class="wrap">
+      <span class="kicker">Built around how a dealer sells</span>
+      <h2>From first question to signed deal, nothing waits.</h2>
+      <p class="lede">An equipment sale has four moments where buyers drift to the next dealer on 441. We put something in front of each one.</p>
+      <div class="journey">
+        <div class="jstep"><span class="n">1. Ask</span><h4>Answered in seconds, day or night</h4><p>Chat on every page, and an AI receptionist on all three store lines after hours. It knows your inventory, prices and rental rates.</p><div class="links"><a class="tag red" href="#/site">Live chat</a><a class="tag red" href="#/receptionist">AI receptionist</a></div></div>
+        <div class="jstep"><span class="n">2. Book</span><h4>Real times, not "we'll call you"</h4><p>Demo rides, service drop-offs and rental pickups go straight onto the right store's calendar.</p><div class="links"><a class="tag red" href="#/site">Online booking</a></div></div>
+        <div class="jstep"><span class="n">3. Follow up</span><h4>The first dealer to follow up wins</h4><p>Every lead lands in one Pipedrive pipeline, assigned to the right salesperson, with texts that go out on day 1, 3 and 7.</p><div class="links"><a class="tag red" href="#/crm">Sales follow-up</a></div></div>
+        <div class="jstep"><span class="n">4. Come back</span><h4>Your customer list sells again</h4><p>Pre-season service reminders, upgrade offers, rental-to-purchase and implement add-ons, sent from your list.</p><div class="links"><a class="tag red" href="#/past-customers">Past customers</a><a class="tag red" href="#/dashboard">Monthly report</a></div></div>
+      </div>
+      <div class="storeband">
+        <div>
+          <h3 style="font-size:34px">Every buyer reaches the right store.</h3>
+          <p class="muted" style="margin-top:10px">Chats, calls and bookings are routed by where the buyer lives and what they're asking about, then handed to a named person with the whole conversation attached.</p>
+        </div>
+        <div class="routes">
+          <div class="route"><span class="pin">O</span><div><b>Ocala, Hwy 441</b><small>Sales to John Lycan, finance to Roger Walton</small></div></div>
+          <div class="route"><span class="pin">P</span><div><b>Palatka, S Moody Rd</b><small>Sales to Justin Boileau, finance to Emma Nettles</small></div></div>
+          <div class="route"><span class="pin">E</span><div><b>Eustis, County Rd 44</b><small>Store manager Mark Popieski</small></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="demos">
+    <div class="wrap">
+      <span class="kicker">What we built for you</span>
+      <h2>Six things you can click through right now.</h2>
+      <div class="demos">
+        <a class="demo d-a" href="#/site">
+          <div class="shot"><div class="mini-site"><div class="top"><i></i><i></i><i></i></div><div class="hero">Three stores.<br>One team.</div><div class="cards"><i></i><i></i><i></i></div><span class="bubble">Text Ocala Tractor</span></div></div>
+          <div class="body"><span class="num">1. Website</span><h3>Your site, with chat and booking switched on</h3><p>Live chat on every page, a store picker, and "Book a demo ride" on every package. It drops onto your current Dealer Spike site with one line of code.</p><span class="open">Open the website</span></div>
+        </a>
+        <a class="demo d-b" href="#/receptionist">
+          <div class="shot"><div class="mini-chat"><div class="m in">Got a compact tractor with a loader under $30k?</div><div class="m out">The Solis H24 Weekend Workhorse is $29,893 in Ocala. Want a demo ride Tuesday?</div></div></div>
+          <div class="body"><span class="num">2. AI receptionist</span><h3>Talk to it yourself</h3><p>Calls and texts, 24/7. It never negotiates price and hands every lead to a named person.</p><span class="open">Try the receptionist</span></div>
+        </a>
+        <a class="demo d-c" href="#/crm">
+          <div class="shot"><div class="mini-phone"><div class="scr"><div class="b r"></div><div class="b"></div><div class="b g"></div><div class="b"></div><div class="b r"></div><div class="b"></div></div></div></div>
+          <div class="body"><span class="num">3. Sales follow-up</span><h3>What John sees on Monday morning</h3><p>A Pipedrive pipeline for all three stores, with every weekend lead assigned and the follow-up texts already running.</p><span class="open">Take the tour</span></div>
+        </a>
+        <a class="demo d-d" href="#/site" data-open-booking="demo">
+          <div class="shot"><div class="mini-cal"><div class="bar" style="height:40%;background:var(--line)"></div><div class="bar" style="height:70%;background:var(--red)"></div><div class="bar" style="height:55%;background:var(--line)"></div><div class="bar" style="height:85%;background:var(--red)"></div><div class="bar" style="height:35%;background:var(--line)"></div></div></div>
+          <div class="body"><span class="num">4. Online booking</span><h3>Demo rides, service and rentals on a real calendar</h3><p>The buyer picks a store and a time. The salesperson gets the slot with the machine and the buyer's notes attached.</p><span class="open">Book a demo ride</span></div>
+        </a>
+        <a class="demo d-e" href="#/dashboard">
+          <div class="shot"><div class="mini-dash"><div><small>After-hours calls answered</small><b><s>?</s>100%</b></div><div><small>First reply to a web lead</small><b><s>?</s>2 min</b></div><div><small>Leads followed up</small><b><s>?</s>All</b></div><div><small>Stores in one pipeline</small><b><s>0</s>3</b></div></div></div>
+          <div class="body"><span class="num">5. Your monthly report</span><h3>Where you are today, and where day 90 lands</h3><p>The dashboard you'd open on the 1st of every month, with today's baseline next to the target.</p><span class="open">Open the dashboard</span></div>
+        </a>
+        <a class="demo d-f" href="#/past-customers">
+          <div class="shot"><div class="mini-chat" style="background:var(--steel)"><div class="m in" style="background:#fff;color:#1E2226">Mowing season is 6 weeks out. Want us to service your Gravely before the rush?</div><div class="m out">Yes, Thursday works.</div></div></div>
+          <div class="body"><span class="num">6. Past customers</span><h3>Your list is your cheapest next sale</h3><p>Five campaigns that fill the service bay and the sales floor from customers you already have, with a calculator for your numbers.</p><span class="open">Try the calculator</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+  <section class="band" style="background:var(--steel)">
+    <div class="wrap">
+      <span class="kicker">What it's worth</span>
+      <h2>Not a marketing cost. Sales you're already being asked for.</h2>
+      <p class="lede">Your numbers, not ours. Every input is a conservative starting point, so move the sliders to what you actually see across the three stores.</p>
+      <div class="calc">
+        <div class="calc-out" aria-live="polite">
+          <span class="kicker">Added sales in year one</span>
+          <div class="big" id="roiYear">$0</div>
+          <p class="muted small" id="roiSub"></p>
+          <div style="margin-top:18px">
+            <div class="row"><span class="i">1</span><div>After-hours calls that become deals<small>Calls a week × become leads × close rate × average deal</small></div><b id="r1">$0</b></div>
+            <div class="row"><span class="i">2</span><div>Web leads answered in minutes<small>Web leads × close-rate lift from instant replies × average deal</small></div><b id="r2">$0</b></div>
+            <div class="row"><span class="i">3</span><div>Quotes recovered by follow-up<small>Open quotes a month × share recovered × average deal</small></div><b id="r3">$0</b></div>
+            <div class="row"><span class="i">4</span><div>Service booked online<small>Extra service tickets a month × average ticket</small></div><b id="r4">$0</b></div>
+          </div>
+          <p class="small muted" style="margin-top:14px">Monthly figures at full speed. Year one assumes about 3 months of ramp-up. Sales before equipment cost.</p>
+        </div>
+        <div class="calc-in" id="roiInputs">
+          <h4 style="margin-bottom:16px">Your numbers</h4>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <span class="kicker">How it goes live</span>
+      <h2>Live in 30 days. Nobody on your team learns new software.</h2>
+      <div class="timeline">
+        <div class="tl"><div class="w">Week 1</div><p>AI receptionist answering all three store lines after hours. Missed-call text-back on. Search descriptions fixed.</p></div>
+        <div class="tl"><div class="w">Week 2</div><p>Chat on every page of ocalatractor.com. Demo, service and rental booking on each store's calendar.</p></div>
+        <div class="tl"><div class="w">Week 3</div><p>Pipedrive pipeline for all three stores. Store routing and day 1, 3, 7 follow-up texts switched on.</p></div>
+        <div class="tl"><div class="w">Week 4+</div><p>Pre-season service campaign to your customer list. First monthly report on the 1st.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" style="padding-top:0">
+    <div class="wrap">
+      <span class="kicker">Who's building it</span>
+      <h2>A Central Florida team, an hour down the road.</h2>
+      <p class="lede">DFT is a business modernization and AI automation firm based in Lake Mary. We build the systems, run them, and check every message they send.</p>
+      <div class="team">
+        <div class="panel"><b>Lake Mary, FL</b><span>Close enough to sit down with each store manager</span></div>
+        <div class="panel"><b>Pipedrive</b><span>Verified technology partner for the CRM we'd set up</span></div>
+        <div class="panel"><b>Since 1992</b><span>Part of the Technology International, Inc. family</span></div>
+        <div class="panel"><b>Built for you</b><span>Every demo on this page uses your inventory, stores and staff</span></div>
+      </div>
+      <a class="pc-banner" href="#/past-customers" style="text-decoration:none">
+        <div><h3 style="font-size:34px">Sell to the customers you already have</h3><p style="opacity:.9;margin-top:6px">Five campaigns from your own customer list, with a calculator to try your numbers.</p></div>
+        <span class="btn btn-light">Try the calculator</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="band" style="padding-top:0">
+    <div class="wrap">
+      <div class="close">
+        <div>
+          <h2 style="font-size:clamp(40px,5vw,60px)">Let's make week 1 start Monday.</h2>
+          <p style="margin-top:12px;opacity:.95">Here's what we need to switch it on. Everything you clicked through today goes live on your real accounts.</p>
+          <ul>
+            <li>A contact at Dealer Spike, or admin access, to add one line of code</li>
+            <li>After-hours call forwarding on the three store lines</li>
+            <li>An export of your customer and sales list</li>
+            <li>30 minutes with John, Justin and Mark</li>
+          </ul>
+        </div>
+        <div style="display:grid;gap:10px">
+          <a class="btn btn-light" style="justify-content:center" href="mailto:rifat@dgftech.us?subject=Ocala%20Tractor%20%E2%80%94%20let%27s%20start%20week%201">Email Rifat</a>
+          <a class="btn btn-ghost" style="justify-content:center" href="#demos">See the demos again</a>
+        </div>
+      </div>
+      <div class="footlinks"><a href="#/site">Website</a><a href="#/receptionist">AI receptionist</a><a href="#/crm">Sales follow-up</a><a href="#/dashboard">90-day results</a><a href="#/past-customers">Past customers</a></div>
+      <p class="fine">Concept built by DFT for Ocala Tractor LLC from public information on ocalatractor.com and dealer listings, October 2026. Demo conversations, leads, dashboard figures and calculator defaults are illustrative. Targets are goals, not guarantees. The Ocala Tractor name, inventory and staff details belong to Ocala Tractor LLC.</p>
+    </div>
+  </section>
+</main>
+<!-- ================= SITE DEMO ================= -->
+<main class="view" id="v-site">
+  <div class="s-util"><div class="wrap"><span><b>Ocala</b> 352-732-8585 &nbsp; <b>Palatka</b> 386-320-7253 &nbsp; <b>Eustis</b> 352-357-7950</span><span>Chat and booking open 24/7 &nbsp; We ship to all 50 states</span></div></div>
+  <div class="s-head"><div class="wrap">
+    <a class="s-logo" href="#/site"><span class="mark"><svg width="30" height="20" style="color:#fff;--hub:var(--red)"><use href="#tractor"/></svg></span><span><b>Ocala Tractor</b><small>Family-owned. Three stores.</small></span></a>
+    <nav><a href="#inv">Inventory</a><a href="#svc">Rentals</a><a href="#svc">Financing</a><a href="#svc">Parts &amp; service</a><a href="#stores">Locations</a></nav>
+    <div class="right">
+      <select class="storepick" id="storePick" aria-label="Your store"><option>Ocala</option><option>Palatka</option><option>Eustis</option></select>
+      <button class="btn btn-red btn-sm" data-open-booking="demo">Book a demo</button>
+    </div>
+  </div></div>
+  <section class="s-hero">
+    <div class="stripe" aria-hidden="true"></div>
+    <svg class="tractor" viewBox="0 0 240 150" aria-hidden="true" style="--hub:var(--red)"><use href="#tractor"/></svg>
+    <div class="wrap">
+      <span class="kicker" style="color:#FF8A8D">TYM, Massey Ferguson, Solis, Kioti, Gravely, Bad Boy, New Holland</span>
+      <h1>Tractors and mowers, ready when you are.</h1>
+      <p class="lede">New, pre-owned and rental equipment from a family-owned dealer with stores in Ocala, Palatka and Eustis. Ask us anything, any hour, and book a demo ride on your schedule.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:28px">
+        <button class="btn btn-red" data-open-booking="demo">Book a demo ride</button>
+        <button class="btn btn-ghost" data-open-chat>Ask a question</button>
+      </div>
+    </div>
+  </section>
+  <div class="wrap">
+    <div class="finder">
+      <div class="tabs" role="tablist">
+        <button class="chip on" data-ftab="buy">Buy</button><button class="chip" data-ftab="rent">Rent</button><button class="chip" data-ftab="service">Service</button><button class="chip" data-ftab="finance">Finance</button>
+      </div>
+      <div class="row">
+        <select id="fType" aria-label="Equipment type"><option value="">Any equipment</option><option>Tractor</option><option>Lawn Mower</option><option>Spreader</option></select>
+        <select id="fBudget" aria-label="Budget"><option value="0">Any budget</option><option value="10000">Under $10,000</option><option value="20000">Under $20,000</option><option value="30000">Under $30,000</option><option value="45000">Under $45,000</option></select>
+        <select id="fStore" aria-label="Store"><option value="">All stores</option><option>Ocala</option><option>Palatka</option><option>Eustis</option></select>
+        <button class="btn btn-red" id="fGo" style="justify-content:center">Show matches</button>
+      </div>
+    </div>
+    <div class="trust">
+      <div><b>Family-owned</b>Three stores, one team</div>
+      <div><b>Pre-qualify, no SSN</b>See your options first</div>
+      <div><b>Package deals</b>Machine plus implements</div>
+      <div><b>Ships nationwide</b>All 50 states</div>
+    </div>
+
+    <section style="padding-top:72px" id="inv">
+      <div style="display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap">
+        <div><span class="kicker">On the lot now</span><h2>Package deals, priced to drive home.</h2></div>
+        <p class="muted" id="invCount"></p>
+      </div>
+      <div class="inv" id="invGrid"></div>
+    </section>
+
+    <section style="padding-top:80px" id="svc">
+      <span class="kicker">Book it online</span>
+      <h2>Pick a time. We'll have it ready.</h2>
+      <div class="services">
+        <div class="svc"><span class="tag red">Sales</span><h4>Demo ride</h4><p>Try a tractor or zero-turn on our lot with a salesperson who knows the machine.</p><button class="btn btn-red btn-sm" data-open-booking="demo">Book a demo</button></div>
+        <div class="svc"><span class="tag">Service</span><h4>Service drop-off</h4><p>Pre-season tune-ups, repairs and warranty work. Choose a drop-off time.</p><button class="btn btn-red btn-sm" data-open-booking="service">Book service</button></div>
+        <div class="svc"><span class="tag green">Rentals</span><h4>Rental pickup</h4><p>Utility tractors from $545 a day, box scrapers from $50. Reserve your pickup.</p><button class="btn btn-red btn-sm" data-open-booking="rental">Reserve a rental</button></div>
+        <div class="svc"><span class="tag">Finance</span><h4>Pre-qualify</h4><p>No SSN required. A finance manager calls with your options the same day.</p><button class="btn btn-red btn-sm" data-open-booking="finance">Start pre-qualifying</button></div>
+      </div>
+    </section>
+
+    <section style="padding-top:80px" id="stores">
+      <span class="kicker">Three stores</span>
+      <h2>Close to home in North Central Florida.</h2>
+      <div class="stores">
+        <div class="store"><h4>Ocala</h4><p class="muted">5841 N. US Hwy 441, Ocala, FL 34475</p><p style="margin-top:6px"><a href="tel:3527328585">352-732-8585</a></p><div class="who"><span class="avatar">JL</span><div><b>John Lycan</b><br><span class="muted small">Sales Manager</span></div></div></div>
+        <div class="store"><h4>Palatka</h4><p class="muted">819 S Moody Rd, Palatka, FL 32177</p><p style="margin-top:6px"><a href="tel:3863207253">386-320-7253</a></p><div class="who"><span class="avatar">JB</span><div><b>Justin Boileau</b><br><span class="muted small">Sales Manager</span></div></div></div>
+        <div class="store"><h4>Eustis</h4><p class="muted">1255 County Rd 44, Eustis, FL 32736</p><p style="margin-top:6px"><a href="tel:3523577950">352-357-7950</a></p><div class="who"><span class="avatar">MP</span><div><b>Mark Popieski</b><br><span class="muted small">Store Manager</span></div></div></div>
+      </div>
+    </section>
+  </div>
+  <footer class="s-foot"><div class="wrap cols">
+    <div><h4>Ocala Tractor LLC</h4><p class="small">Family-owned outdoor power, agriculture and construction equipment. New, pre-owned, rentals, parts, service and financing.</p></div>
+    <div><h4>Shop</h4><a href="#inv">New inventory</a><a href="#inv">Pre-owned</a><a href="#inv">Package deals</a><a href="#svc">Rentals</a></div>
+    <div><h4>Service</h4><a href="#svc" data-open-booking="service">Book service</a><a href="#svc">Parts</a><a href="#svc" data-open-booking="finance">Financing</a></div>
+    <div><h4>Stores</h4><a href="#stores">Ocala</a><a href="#stores">Palatka</a><a href="#stores">Eustis</a></div>
+  </div></footer>
+</main>
+<!-- ================= RECEPTIONIST ================= -->
+<main class="view" id="v-receptionist">
+  <section class="rx"><div class="wrap layout">
+    <div>
+      <span class="kicker">Stores closed. Phone answered.</span>
+      <h1>Call Ocala Tractor at <span class="t">6:15pm</span> on a Saturday.</h1>
+      <p class="lede" style="margin-top:18px">All three stores are closed and the buyer is one tap from the next dealer. Ocala Tractor's AI receptionist <b>matches what they want to your inventory, routes them to the right store, offers real demo times and drops a clean lead into Pipedrive</b>. Your salesperson picks it up Monday with the whole conversation attached.</p>
+      <span class="kicker" style="margin-top:26px">Try it yourself</span>
+      <div class="tries" id="tries"></div>
+    </div>
+    <div>
+      <div class="mode" role="group" aria-label="Mode"><button aria-pressed="true" data-mode="text">Text</button><button aria-pressed="false" data-mode="call">Call</button></div>
+      <div class="phone"><div class="screen">
+        <div class="status"><span>6:15</span><span>●●● 5G</span></div>
+        <div class="who"><div class="mk">OT</div><b>Ocala Tractor</b><br><small>● AI receptionist, replies in seconds</small></div>
+        <div class="msgs" id="rxMsgs" aria-live="polite"></div>
+        <div class="callview" id="callView">
+          <div class="orb" id="orb"></div>
+          <b>Ocala Tractor</b>
+          <p class="cap" id="callCap">Tap the mic and ask about a tractor, a rental or service.</p>
+          <button class="mic" id="micBtn" aria-label="Hold to talk">Talk</button>
+          <p class="small" style="color:#8F989F" id="micNote"></p>
+        </div>
+        <form class="composer" id="rxForm"><input id="rxInput" placeholder="Text Ocala Tractor" aria-label="Message" autocomplete="off"><button aria-label="Send">➤</button></form>
+      </div></div>
+      <p class="cap-note" id="rxNote">Real replies from a live AI. Leads landing in Pipedrive are simulated for this demo.</p>
+    </div>
+    <div>
+      <div class="crmcard">
+        <div class="h"><span class="pd">P</span>Pipedrive, new leads<small id="leadCount">0 tonight</small></div>
+        <div class="deals" id="deals"><div class="empty">Waiting for a lead.<br>Ask about a machine in the chat and watch it land here, with the store and salesperson already filled in.</div></div>
+      </div>
+      <div class="does">
+        <span class="kicker" style="color:#C5CBD0">What it does</span>
+        <div class="it"><i>◷</i><div><b>Answers all three stores 24/7</b><small>Calls and texts, nights, weekends and holidays.</small></div></div>
+        <div class="it"><i>⇄</i><div><b>Routes to the right store and person</b><small>Ocala to John, Palatka to Justin, Eustis to Mark. Finance to Roger or Emma.</small></div></div>
+        <div class="it"><i>▦</i><div><b>Knows your lot</b><small>Matches requests to inventory, packages and rental rates.</small></div></div>
+        <div class="it"><i>✓</i><div><b>Books demos, service and rentals</b><small>Real slots on each store's calendar. Your team confirms.</small></div></div>
+        <div class="it"><i>$</i><div><b>Never negotiates</b><small>Quotes your advertised cash price, then hands the deal to a salesperson.</small></div></div>
+        <div class="it"><i>♪</i><div><b>Sounds like a real Florida receptionist</b><small>This demo uses your browser's voice. In production it runs a natural ElevenLabs voice on your numbers.</small></div></div>
+      </div>
+      <p class="small" style="color:#8F989F;margin-top:12px">Also lives on the website as a chat bubble. <a href="#/site" style="color:#FF8A8D;font-weight:700">See the site</a></p>
+    </div>
+  </div></section>
+</main>
+
+<!-- ================= CRM TOUR ================= -->
+<main class="view" id="v-crm">
+  <section class="crm"><div class="wrap layout">
+    <div class="pdphone"><div class="screen">
+      <div class="push" id="push"><b id="pushT">New lead, Palatka</b><span id="pushB">Solis H24 · wants financing · from Saturday chat</span></div>
+      <div class="pdtop"><span>8:02</span><span>Pipedrive</span></div>
+      <div class="pdbody" id="pdBody"></div>
+      <div class="pdtab"><span class="on">Today</span><span>Deals</span><span>Inbox</span><span>Calendar</span><span>Stores</span></div>
+    </div></div>
+    <div>
+      <span class="kicker">What your sales team sees</span>
+      <div class="step" id="crmStep">1 of 8</div>
+      <h2 id="crmTitle"></h2>
+      <p class="lede" id="crmText" style="margin-top:6px"></p>
+      <div class="why"><b>Why it matters for Ocala Tractor</b><span id="crmWhy"></span></div>
+      <div class="jump" id="crmJump"></div>
+      <div class="ctrl">
+        <button class="btn btn-red btn-sm" id="crmPing">Send a live lead</button>
+        <button class="btn btn-ghost btn-sm" id="crmPrev">Previous</button>
+        <button class="btn btn-ghost btn-sm" id="crmNext">Next screen</button>
+      </div>
+    </div>
+  </div></section>
+</main>
+
+<!-- ================= DASHBOARD ================= -->
+<main class="view" id="v-dashboard">
+  <section class="dash"><div class="wrap">
+    <div class="top">
+      <div><span class="kicker">What you'd see every month</span><h2>Ocala Tractor's response, in one place.</h2><p class="lede">Every number that decides whether a buyer in Marion, Putnam or Lake County gets an answer, books a demo and comes back. The Today column is what we can see from outside. Day 90 is what we're working toward, not a result.</p></div>
+      <div><div class="toggle" role="group" aria-label="View"><button aria-pressed="true" data-dv="today">Today</button><button aria-pressed="false" data-dv="target">Day 90 target</button></div></div>
+    </div>
+    <div class="banner" id="dBanner">Showing today's baseline, checked October 2026 from your website and listings.</div>
+    <div class="kpis" id="kpis"></div>
+    <div class="panel" style="margin-top:16px">
+      <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap"><div><h4>Speed to first reply, by channel</h4><p class="muted small">How long a buyer waits for a real answer. Left is faster. The green zone is under 5 minutes.</p></div><span class="tag green">Tracked channels</span></div>
+      <div class="scroll-x" style="margin-top:10px"><table class="tbl"><thead><tr><th>Channel</th><th>Today</th><th>Day 90 target</th><th>Wait, fastest on the left</th></tr></thead><tbody id="speedRows"></tbody></table></div>
+    </div>
+    <div class="charts">
+      <div class="panel"><div style="display:flex;justify-content:space-between"><h4>Leads captured per week</h4><span class="tag red">Projection</span></div><p class="muted small">All channels, all three stores. Starts counting in week one.</p><svg id="ch1" viewBox="0 0 420 200" style="width:100%;margin-top:10px"></svg></div>
+      <div class="panel"><div style="display:flex;justify-content:space-between"><h4>Leads with a follow-up sent</h4><span class="tag red">Projection</span></div><p class="muted small">Share of new leads that get the day 1, 3 and 7 texts.</p><svg id="ch2" viewBox="0 0 420 200" style="width:100%;margin-top:10px"></svg></div>
+    </div>
+    <div class="three">
+      <div class="panel"><h4>Leads routed, by store</h4><p class="muted small">Assigned to a named salesperson within 5 minutes.</p><svg id="ch3" viewBox="0 0 300 180" style="width:100%;margin-top:10px"></svg></div>
+      <div class="panel"><h4>Demos booked online</h4><p class="muted small">Real calendar slots, not callback forms.</p><svg id="ch4" viewBox="0 0 300 180" style="width:100%;margin-top:10px"></svg></div>
+      <div class="panel shop"><h4>Who answers first</h4><p class="muted small">Each month we text and chat local dealers after hours and log who replies, and how fast.</p><div id="shopRows"></div></div>
+    </div>
+    <div class="two">
+      <div class="panel log"><div style="display:flex;justify-content:space-between"><h4>What we did this month</h4><span class="tag">Example month</span></div><p class="muted small">The activity log you'd get each month.</p><div id="logRows" style="margin-top:6px"></div></div>
+      <div class="panel score"><h4>Calls, bookings and follow-up</h4><p class="muted small">Counted from Pipedrive and the AI receptionist.</p><div id="scoreRows" style="margin-top:6px"></div></div>
+    </div>
+    <p class="fine" style="margin-top:18px"><b>How to read this.</b> Today's figures come from ocalatractor.com and public dealer listings, checked October 2026. Where Ocala Tractor doesn't track a number yet, we say so and start measuring in week one. Anything marked Target or Projection is a goal for day 90, not a result.</p>
+  </div></section>
+</main>
+
+<!-- ================= PAST CUSTOMERS ================= -->
+<main class="view" id="v-past-customers">
+  <section class="pc"><div class="wrap">
+    <span class="kicker">Outside of ads, try your numbers</span>
+    <h1>Your past buyers are your cheapest next sale.</h1>
+    <div class="calcrow">
+      <div class="calc-in" id="pcInputs">
+        <div class="slider"><label>How well it lands</label><div class="seg" role="group"><button data-lv="0.6" aria-pressed="false">Cautious</button><button data-lv="1" aria-pressed="true">Expected</button><button data-lv="1.4" aria-pressed="false">Strong</button></div></div>
+      </div>
+      <div class="calc-out" aria-live="polite">
+        <span class="kicker">Extra sales a year</span>
+        <div class="big" id="pcTotal">$0</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px">
+          <div style="background:var(--iron-2);border-radius:12px;padding:14px"><small class="muted">Extra sales and service jobs a month</small><div style="font-family:var(--display);font-size:32px;font-weight:800" id="pcJobs">0</div></div>
+          <div style="background:var(--iron-2);border-radius:12px;padding:14px"><small class="muted">Ad spend you don't need</small><div style="font-family:var(--display);font-size:32px;font-weight:800" id="pcAds">$0</div></div>
+        </div>
+        <div class="stack" id="pcStack"></div>
+        <div class="legend" id="pcLegend"></div>
+        <p class="small muted" style="margin-top:14px">Estimates from typical dealer re-engagement results, replaced by your real numbers after month one.</p>
+      </div>
+    </div>
+    <section style="padding-top:72px">
+      <span class="kicker">The five campaigns</span>
+      <h2>What your customers get on their phone.</h2>
+      <p class="lede">Switch any one off to see what it's worth on its own.</p>
+      <div class="camps" id="camps"></div>
+    </section>
+    <section style="padding-top:72px">
+      <span class="kicker">How it runs</span>
+      <h2>We do three steps. You do one.</h2>
+      <div class="steps4">
+        <div><span class="kicker" style="margin:0">1</span><h4>Pull your list</h4><p>From your sales, service and rental records, cleaned and loaded into Pipedrive.</p><span class="tag green">We do it</span></div>
+        <div><span class="kicker" style="margin:0">2</span><h4>Write and send</h4><p>The right message for the right season, signed by your store.</p><span class="tag green">We do it</span></div>
+        <div><span class="kicker" style="margin:0">3</span><h4>Answer and book</h4><p>The AI replies in seconds and books the service slot or demo ride.</p><span class="tag green">We do it</span></div>
+        <div><span class="kicker" style="margin:0">4</span><h4>Close the deal</h4><p>It's on your calendar with the notes attached. Show up and sell.</p><span class="tag red">You</span></div>
+      </div>
+    </section>
+    <section style="margin-top:72px;background:var(--iron);color:#EEF0EF;border-radius:var(--r-lg);padding:40px">
+      <span class="kicker" style="color:#FF8A8D">Why this works</span>
+      <h2 style="max-width:16ch">Not a hire. Not an agency. A team that ships.</h2>
+      <div class="vs">
+        <div><h4>Hire a BDC rep</h4><ul><li>Salary, benefits and training</li><li>Works 40 hours, not 168</li><li>One person covering three stores</li><li>You manage them</li></ul></div>
+        <div><h4>Hire a dealer marketing agency</h4><ul><li>Long contracts</li><li>Reports clicks, not deals</li><li>Handed to junior staff</li><li>Sells you more ads</li></ul></div>
+        <div class="us"><span class="tag red">DFT</span><h4 style="margin-top:8px">A systems partner</h4><ul><li>Live in weeks</li><li>AI does the volume, people check it</li><li>Measured in booked demos and sales</li><li>Nothing for you to manage</li></ul></div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:20px"><span class="tag">Your numbers and email only</span><span class="tag">Texts only to customers who opted in</span><span class="tag">You approve every message</span></div>
+    </section>
+    <div style="text-align:center;margin-top:64px">
+      <h2>Want to see this with your own customer list?</h2>
+      <a class="btn btn-red" style="margin-top:20px" href="mailto:rifat@dgftech.us?subject=Ocala%20Tractor%20%E2%80%94%20past%20customer%20campaigns">Book 30 minutes</a>
+      <p class="fine" style="margin:18px auto 0">Built by DFT. Example messages use Ocala Tractor's name. Figures are estimates, not guarantees.</p>
+    </div>
+  </div></section>
+</main>
+
+<!-- shared chat + booking -->
+<button class="fab" id="fab" data-open-chat hidden><span class="ic">💬</span><span><b>Text Ocala Tractor</b><small>We answer 24/7</small></span></button>
+<div class="chatpanel" id="chatPanel" role="dialog" aria-label="Chat with Ocala Tractor">
+  <div class="chathead"><span class="avatar" style="background:var(--red)">OT</span><div><b>Ocala Tractor</b><small>AI assistant, a real person follows up</small></div><button id="chatClose" aria-label="Close chat">×</button></div>
+  <div class="msgs" id="siteMsgs" aria-live="polite"></div>
+  <div class="quick" id="siteQuick"></div>
+  <form class="composer" id="siteForm"><input id="siteInput" placeholder="Ask about a machine, rental or service" aria-label="Message" autocomplete="off"><button aria-label="Send">➤</button></form>
+</div>
+<div class="modal" id="bookModal" role="dialog" aria-modal="true" aria-labelledby="bkTitle">
+  <div class="sheet" id="bkSheet"></div>
+</div>
+<script>
+(function(){
+"use strict";
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>Array.from(r.querySelectorAll(s));
+const money=n=>"$"+Math.round(n).toLocaleString("en-US");
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+/* ---------- Data from ocalatractor.com ---------- */
+const STORES={
+  Ocala:{addr:"5841 N. US Hwy 441, Ocala",phone:"352-732-8585",sales:"John Lycan",finance:"Roger Walton",service:"Jason Perillo",parts:"Clay Lawrence"},
+  Palatka:{addr:"819 S Moody Rd, Palatka",phone:"386-320-7253",sales:"Justin Boileau",finance:"Emma Nettles",service:"Jason Perillo",parts:"Beau Scurry"},
+  Eustis:{addr:"1255 County Rd 44, Eustis",phone:"352-357-7950",sales:"Mark Popieski",finance:"Roger Walton",service:"Jason Perillo",parts:"Clay Lawrence"}
+};
+const INV=[
+ {mk:"Solis",model:"H24 Compact Tractor",pkg:"The Weekend Workhorse",type:"Tractor",price:29893,msrp:33878,store:"Ocala",icon:"tractor"},
+ {mk:"TYM",model:"Series 3 T474 (48.3 hp)",pkg:"The Weekend Rancher",type:"Tractor",price:35234,msrp:39932,store:"Ocala",icon:"tractor"},
+ {mk:"Massey Ferguson",model:"1E.35 Compact Utility",pkg:"The Red Iron",type:"Tractor",price:39102,msrp:44316,store:"Ocala",icon:"tractor"},
+ {mk:"Massey Ferguson",model:"1GC.23 Compact",pkg:"The Country Mile",type:"Tractor",price:24484,msrp:30483,store:"Ocala",icon:"tractor"},
+ {mk:"Solis",model:"H24 Plus Compact Tractor",pkg:"Honey, I Dug a Hole",type:"Tractor",price:35492,msrp:40225,store:"Ocala",icon:"tractor"},
+ {mk:"Gravely",model:"Pro-Turn 148 Kawasaki FX691V",pkg:"The Money Maker",type:"Lawn Mower",price:15492,msrp:16999,store:"Ocala",icon:"mower"},
+ {mk:"Gravely",model:"ZT X 52 Kawasaki",pkg:"The Palatka Power",type:"Lawn Mower",price:7909,msrp:8814,store:"Palatka",icon:"mower"},
+ {mk:"Bad Boy",model:"MZ Magnum 54\" Kawasaki",pkg:"The Backyard Boss",type:"Lawn Mower",price:7646,msrp:11999,store:"Palatka",icon:"mower"},
+ {mk:"Kioti",model:"ZXS48 Zero-Turn",pkg:"The Kioti Ugly",type:"Lawn Mower",price:14417,msrp:14667,store:"Palatka",icon:"mower"},
+ {mk:"Bad Boy",model:"MZ Rambler 42\" Kawasaki",pkg:"The Harris Chain",type:"Lawn Mower",price:null,msrp:null,store:"Eustis",icon:"mower"},
+ {mk:"Bad Boy",model:"MZ Magnum 48\" Kawasaki",pkg:"The Lake Eustis",type:"Lawn Mower",price:null,msrp:null,store:"Eustis",icon:"mower"},
+ {mk:"H&S",model:"S1225 Manure Spreader",pkg:"Easy financing",type:"Spreader",price:5098,msrp:6192,store:"Ocala",icon:"tractor"}
+];
+const RENTALS="TYM T130 utility tractor: $650/day, $2,000/week, $6,000/month. TYM T115 utility tractor: $545/day, $1,675/week, $3,260/month. Woods BS72.20 box scraper: $50/day, $150/week, $400/month. Taxes and insurance extra.";
+const LEADS=[]; // shared pipeline across demos
+
+/* ---------- Router ---------- */
+const ROUTES={proposal:"Proposal by DFT",site:"Website concept","receptionist":"AI receptionist",crm:"Sales follow-up concept",dashboard:"Growth dashboard","past-customers":"Past customer campaigns"};
+function route(){
+  const h=location.hash;
+  if(h && !h.startsWith("#/")) return; // in-page anchor
+  let r=(h.replace("#/","")||"proposal").split("?")[0];
+  if(!ROUTES[r]) r="proposal";
+  $$(".view").forEach(v=>v.classList.toggle("active",v.id==="v-"+r));
+  $$(".demonav nav a").forEach(a=>{ if(a.getAttribute("href")==="#/"+r) a.setAttribute("aria-current","page"); else a.removeAttribute("aria-current"); });
+  $("#navsub").textContent=ROUTES[r];
+  $("#conceptbar").style.display=r==="proposal"?"none":"flex";
+  $("#fab").hidden=r!=="site";
+  if(r!=="site") $("#chatPanel").classList.remove("open");
+  window.scrollTo(0,0);
+  if(r==="crm") crmStart(); else crmStop();
+  if(r==="receptionist") renderDeals();
+  if(pendingBooking){const t=pendingBooking;pendingBooking=null;setTimeout(()=>openBooking(t),60);}
+}
+let pendingBooking=null;
+document.addEventListener("click",e=>{
+  const b=e.target.closest("[data-open-booking]");
+  if(b){
+    if(b.tagName==="A" && b.getAttribute("href")==="#/site" && !location.hash.startsWith("#/site")){pendingBooking=b.dataset.openBooking;return;}
+    e.preventDefault(); openBooking(b.dataset.openBooking); return;
+  }
+  if(e.target.closest("[data-open-chat]")){e.preventDefault();openChat();}
+});
+window.addEventListener("hashchange",route);
+
+/* ---------- AI engine ---------- */
+let samplePromise=null;
+function getSample(){
+  if(!samplePromise){
+    samplePromise=(async()=>{try{ if(!window.claude||!window.claude.use) return null; return await window.claude.use("sample"); }catch(e){return null;}})();
+  }
+  return samplePromise;
+}
+getSample();
+const invText=INV.map(u=>`${u.mk} ${u.model} "${u.pkg}" package, ${u.type}, ${u.store} store, ${u.price?("cash price "+money(u.price)+" (MSRP "+money(u.msrp)+")"):"call for price"}`).join("\n");
+function sysPrompt(channel){
+  const now=new Date();
+  return `You are the after-hours AI receptionist for Ocala Tractor LLC, a family-owned outdoor power, agriculture and construction equipment dealer in Florida. You are replying by ${channel}. It is currently 6:15pm on a Saturday and all stores are closed (Ocala hours are Mon-Fri 8am-5pm).
+STORES:
+- Ocala: 5841 N. US Hwy 441, Ocala FL, 352-732-8585. Sales manager John Lycan. Finance manager Roger Walton. Service manager Jason Perillo. Parts director Clay Lawrence.
+- Palatka: 819 S Moody Rd, Palatka FL, 386-320-7253. Sales manager Justin Boileau. Finance manager Emma Nettles. Parts manager Beau Scurry. Serves Palatka and Putnam County.
+- Eustis (Lake County): 1255 County Rd 44, Eustis FL, 352-357-7950. Store manager Mark Popieski.
+Pick the store closest to the customer (Marion County/Ocala/Gainesville/The Villages -> Ocala; Putnam County/Palatka/St Augustine side -> Palatka; Lake County/Eustis/Mount Dora/Tavares/Leesburg -> Eustis). If unknown, ask where they are.
+BRANDS: TYM, Massey Ferguson, Solis, Kioti, Gravely, Bad Boy, New Holland, DEVELON mini excavators, Echo and Shindaiwa handheld tools. Ships to all 50 states.
+INVENTORY (sample):
+${invText}
+RENTALS: ${RENTALS}
+FINANCING: online pre-qualify with no SSN required; a finance manager follows up. Never promise approval or quote rates.
+RULES: Keep replies to 1-3 short sentences, warm and plain, like a friendly Central Florida receptionist. Quote only the advertised cash price; never discount or negotiate, say the salesperson will work the deal. Never invent inventory, specs or prices not listed; if unsure say a salesperson will confirm. Offer a concrete next step: a demo ride, service drop-off, rental pickup or finance call, with 2 specific times next week (Mon-Fri, 8am-5pm, e.g. "Tuesday 10am or Wednesday 2pm"). Ask for a first name and phone when booking. Always name the person who will follow up.
+OUTPUT: Return ONLY a JSON object, no markdown: {"reply":"text to send","lead":null or {"type":"Demo ride|Service|Rental|Finance|Sales question|Parts","store":"Ocala|Palatka|Eustis","owner":"person's name","interest":"machine or job","detail":"one-line summary of what they want","slot":"requested time or empty","hot":true|false}}. Create a lead object as soon as the customer shows real buying, booking, service or rental intent and a store is known; otherwise null.`;
+}
+function fallback(text){
+  const t=text.toLowerCase(); let store="Ocala";
+  if(/palatka|putnam|st\.? aug|crescent/.test(t)) store="Palatka"; else if(/eustis|lake county|mount dora|tavares|leesburg/.test(t)) store="Eustis";
+  const S=STORES[store];
+  if(/rent|t130|t115|scraper/.test(t)) return {reply:`The TYM T130 rents for $650 a day or $2,000 for the week, and the T115 is $545 a day. I can hold a pickup at our ${store} store Monday 8am or Tuesday 9am. What's your first name and best number?`,lead:{type:"Rental",store,owner:S.sales,interest:"TYM T130 utility tractor",detail:"Weekend/week rental inquiry",slot:"Mon 8am or Tue 9am",hot:false}};
+  if(/financ|credit|ssn|payment|loan/.test(t)) return {reply:`You can pre-qualify online with no SSN required, and ${S.finance} will call you Monday with your options. I can't promise an approval, but most folks get a clear answer fast. Want me to set that call for Monday 10am?`,lead:{type:"Finance",store,owner:S.finance,interest:"Financing",detail:"Asked about financing, credit concerns",slot:"Mon 10am",hot:true}};
+  if(/service|won.?t start|repair|tune|broke|fix/.test(t)) return {reply:`Sorry to hear that. I can book a service drop-off at our ${store} store Monday 8am or Tuesday 1pm, and ${S.service} will take a look. What's the model, and your first name and number?`,lead:{type:"Service",store,owner:S.service,interest:"Mower or tractor repair",detail:"Machine won't start, wants service",slot:"Mon 8am or Tue 1pm",hot:false}};
+  if(/massey|1e\.?35|best price|discount|deal/.test(t)) return {reply:`The Massey Ferguson 1E.35 "Red Iron" package is advertised at $39,102 cash, down from $44,316 MSRP. ${S.sales} handles any deal on top of that, and I can set a demo ride Tuesday 10am or Wednesday 2pm.`,lead:{type:"Sales question",store,owner:S.sales,interest:"Massey Ferguson 1E.35 Red Iron",detail:"Price shopping, wants best price",slot:"Tue 10am or Wed 2pm",hot:true}};
+  if(/zero.?turn|mower|gravely|bad boy|kioti/.test(t)) return {reply:store==="Palatka"?`Our Palatka store has the Gravely ZT X 52 "Palatka Power" at $7,909 and the Bad Boy MZ Magnum 54" at $7,646. Justin Boileau can do a demo Tuesday 10am or Thursday 3pm. Which works?`:`We've got the Gravely Pro-Turn 148 "Money Maker" at $15,492 for commercial use, and Bad Boy and Gravely residential zero-turns from about $6,200. ${S.sales} can do a demo Tuesday 10am or Thursday 3pm. Which works?`,lead:{type:"Demo ride",store,owner:S.sales,interest:store==="Palatka"?"Gravely ZT X 52 / Bad Boy MZ Magnum":"Zero-turn mower",detail:"Wants to see a zero-turn this week",slot:"Tue 10am or Thu 3pm",hot:true}};
+  if(/tractor|loader|30k|compact|acre/.test(t)) return {reply:`The Solis H24 "Weekend Workhorse" package is $29,893 cash in Ocala, and the Massey 1GC.23 "Country Mile" is $24,484. ${S.sales} can line up a demo ride Tuesday 10am or Wednesday 2pm. Want one of those?`,lead:{type:"Demo ride",store,owner:S.sales,interest:"Solis H24 Weekend Workhorse",detail:"Compact tractor with loader, under $30k",slot:"Tue 10am or Wed 2pm",hot:true}};
+  return {reply:"Hi! The stores are closed right now, but I can answer questions about tractors, mowers, rentals, service or financing and get you on the calendar. Which store is closest to you: Ocala, Palatka or Eustis?",lead:null};
+}
+async function aiReply(history,channel){
+  const s=await Promise.race([getSample(),new Promise(r=>setTimeout(()=>r(null),4000))]);
+  const last=history[history.length-1].content;
+  if(!s) return fallback(last);
+  const turns=history.map((m,i)=>({role:m.role,content:i===0?sysPrompt(channel)+"\n\nCUSTOMER: "+m.content:(m.role==="user"?"CUSTOMER: "+m.content:m.content)}));
+  try{
+    const out=await s.json(turns,{modelTier:"quick",cache:false});
+    if(out && typeof out.reply==="string") return out;
+    return fallback(last);
+  }catch(e){ return fallback(last); }
+}
+function addLead(lead,source){
+  if(!lead||!lead.store) return;
+  const S=STORES[lead.store]||STORES.Ocala;
+  const l=Object.assign({},lead,{owner:lead.owner||S.sales,source,time:new Date()});
+  const dupe=LEADS.findIndex(x=>x.source===source&&x.interest===l.interest&&x.type===l.type);
+  if(dupe>=0) LEADS[dupe]=l; else LEADS.unshift(l);
+  renderDeals();
+}
+function renderDeals(){
+  const box=$("#deals"); if(!box) return;
+  $("#leadCount").textContent=LEADS.length+(LEADS.length===1?" lead":" leads")+" tonight";
+  if(!LEADS.length){box.innerHTML='<div class="empty">Waiting for a lead.<br>Ask about a machine in the chat and watch it land here, with the store and salesperson already filled in.</div>';return;}
+  box.innerHTML=LEADS.map(l=>`<div class="deal" style="border-left-color:${l.hot?"var(--red)":"var(--pasture)"}"><div class="t">${esc(l.interest||l.type)}</div><dl><dt>Type</dt><dd>${esc(l.type)}${l.hot?' <span class="pill r">Hot</span>':""}</dd><dt>Store</dt><dd>${esc(l.store)}</dd><dt>Assigned</dt><dd>${esc(l.owner)}</dd>${l.slot?`<dt>Slot</dt><dd>${esc(l.slot)}</dd>`:""}<dt>Notes</dt><dd>${esc(l.detail||"")}</dd><dt>Source</dt><dd>${esc(l.source)}</dd></dl></div>`).join("");
+}
+/* ---------- Chat UI (shared) ---------- */
+function makeChat(opts){
+  const box=opts.box, hist=[]; let busy=false;
+  function push(role,text,cls){const d=document.createElement("div");d.className="msg "+(cls||(role==="user"?"me":"bot"));d.textContent=text;box.appendChild(d);box.scrollTop=box.scrollHeight;return d;}
+  function typing(){const d=document.createElement("div");d.className="msg bot";d.innerHTML='<span class="typing"><i></i><i></i><i></i></span>';box.appendChild(d);box.scrollTop=box.scrollHeight;return d;}
+  async function send(text){
+    text=(text||"").trim(); if(!text||busy) return; busy=true;
+    push("user",text); hist.push({role:"user",content:text});
+    const t=typing(); opts.onThinking&&opts.onThinking(true);
+    const out=await aiReply(hist,opts.channel());
+    t.remove(); opts.onThinking&&opts.onThinking(false);
+    push("assistant",out.reply); hist.push({role:"assistant",content:JSON.stringify(out)});
+    if(out.lead){ addLead(out.lead,typeof opts.source==="function"?opts.source():opts.source); push("sys","Lead sent to "+(out.lead.owner||STORES[out.lead.store]?.sales||"the team")+" in Pipedrive",'sys'); }
+    opts.onReply&&opts.onReply(out.reply);
+    busy=false;
+  }
+  return {send,push,hist};
+}
+
+/* Site chat */
+const siteChat=makeChat({box:$("#siteMsgs"),channel:()=>"website chat",source:"Website chat"});
+siteChat.push("assistant","Hi, this is Ocala Tractor. Ask me about a tractor, mower, rental, service or financing and I'll get you to the right store.");
+["Compact tractor under $30k?","Rent a tractor this weekend","My mower won't start","Can I finance with bad credit?"].forEach(q=>{const c=document.createElement("button");c.className="chip";c.textContent=q;c.onclick=()=>siteChat.send(q);$("#siteQuick").appendChild(c);});
+$("#siteForm").addEventListener("submit",e=>{e.preventDefault();const v=$("#siteInput").value;$("#siteInput").value="";siteChat.send(v);});
+function openChat(prefill){ if(!location.hash.startsWith("#/site")){location.hash="#/site";} $("#chatPanel").classList.add("open"); setTimeout(()=>{$("#siteInput").focus(); if(prefill) siteChat.send(prefill);},80); }
+$("#chatClose").onclick=()=>$("#chatPanel").classList.remove("open");
+
+/* Receptionist */
+let rxMode="text";
+const rxChat=makeChat({box:$("#rxMsgs"),channel:()=>rxMode==="call"?"phone call (spoken aloud, so no symbols or lists)":"text message",source:()=>rxSource,onThinking:on=>{$("#orb").classList.toggle("talk",on);},onReply:t=>{if(rxMode==="call"){$("#callCap").textContent=t;speak(t);}}});
+rxChat.push("assistant","Hi, this is Ocala Tractor. All three stores are closed for the night, but I can answer questions and get you on the calendar right now. What can I help with?");
+// fix source label for receptionist
+const _send=rxChat.send;
+rxChat.send=async(t)=>{const src=rxMode==="call"?"After-hours call":"After-hours text";rxSource=src;return _send(t);};
+let rxSource="After-hours text";
+const TRIES=[
+ ["Do you have a compact tractor with a loader under $30k?","Matches your inventory"],
+ ["I'm near Palatka, can I see a zero-turn this week?","Routes to the Palatka store"],
+ ["How much to rent the TYM T130 for a weekend?","Answers from your rental rates"],
+ ["My Gravely won't start, can I get it serviced Monday?","Books a service drop-off"],
+ ["Can I get financing with bad credit?","Never promises approval"],
+ ["What's your best price on the Massey 1E.35?","Never negotiates"]
+];
+TRIES.forEach(([q,s])=>{const b=document.createElement("button");b.className="try";b.innerHTML=esc(q)+"<small>"+esc(s)+"</small>";b.onclick=()=>{ if(rxMode==="call"){$("#callCap").textContent="“"+q+"”";} rxChat.send(q);};$("#tries").appendChild(b);});
+$("#rxForm").addEventListener("submit",e=>{e.preventDefault();const v=$("#rxInput").value;$("#rxInput").value="";rxChat.send(v);});
+$$("[data-mode]").forEach(b=>b.onclick=()=>{rxMode=b.dataset.mode;$$("[data-mode]").forEach(x=>x.setAttribute("aria-pressed",x===b));const call=rxMode==="call";$("#callView").classList.toggle("on",call);$("#rxMsgs").style.display=call?"none":"flex";$("#rxForm").style.display=call?"none":"flex"; if(!call&&window.speechSynthesis) speechSynthesis.cancel();});
+function speak(t){try{if(!window.speechSynthesis) return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.rate=1.02;const v=speechSynthesis.getVoices().find(v=>/en-US/.test(v.lang)&&/female|samantha|jenny|aria|google us/i.test(v.name))||speechSynthesis.getVoices().find(v=>/en-US/.test(v.lang));if(v)u.voice=v;u.onstart=()=>$("#orb").classList.add("talk");u.onend=()=>$("#orb").classList.remove("talk");speechSynthesis.speak(u);}catch(e){}}
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition; let rec=null;
+if(!SR){$("#micNote").textContent="Voice input isn't available in this browser. Tap a question on the left and you'll hear the answer.";}
+$("#micBtn").onclick=()=>{
+  if(!SR){ $("#callCap").textContent="Tap one of the questions on the left to hear how it answers."; return; }
+  if(rec){rec.stop();return;}
+  try{rec=new SR();rec.lang="en-US";rec.interimResults=true;
+    rec.onresult=e=>{const t=Array.from(e.results).map(r=>r[0].transcript).join(" ");$("#callCap").textContent="“"+t+"”";if(e.results[e.results.length-1].isFinal){rxChat.send(t);}};
+    rec.onend=()=>{rec=null;$("#micBtn").classList.remove("rec");$("#micBtn").textContent="Talk";};
+    rec.onerror=()=>{$("#micNote").textContent="Microphone isn't available here. Tap a question on the left instead.";};
+    rec.start();$("#micBtn").classList.add("rec");$("#micBtn").textContent="Listening";
+  }catch(e){$("#micNote").textContent="Microphone isn't available here. Tap a question on the left instead.";}
+};
+
+/* ---------- Inventory ---------- */
+let ftab="buy";
+function renderInv(list){
+  $("#invGrid").innerHTML=list.map((u,i)=>`<article class="unit"><div class="pic" style="--hub:var(--steel)"><span class="tag loc">${u.store}</span><svg width="62%" viewBox="0 0 240 150" aria-hidden="true"><use href="#${u.icon}"/></svg></div><div class="b"><span class="mk">2026 ${esc(u.mk)} · ${esc(u.type)}</span><h4>${esc(u.model)}</h4><span class="pkg">“${esc(u.pkg)}” package</span><div class="price">${u.price?`<b>${money(u.price)}</b><s>MSRP ${money(u.msrp)}</s>`:`<b style="font-size:22px">Call for price</b>`}</div><div class="acts"><button class="btn btn-red btn-sm" data-book-unit="${INV.indexOf(u)}">Book a demo ride</button><button class="btn btn-ghost btn-sm" data-ask-unit="${INV.indexOf(u)}">Ask about it</button></div></div></article>`).join("")||'<p class="muted">Nothing matches that yet. Ask in chat and we\'ll check incoming stock.</p>';
+  $("#invCount").textContent=list.length+" of "+INV.length+" units shown";
+}
+renderInv(INV.slice(0,9));
+$("#fGo").onclick=()=>{
+  if(ftab==="rent"){openBooking("rental");return;} if(ftab==="service"){openBooking("service");return;} if(ftab==="finance"){openBooking("finance");return;}
+  const ty=$("#fType").value,bu=+$("#fBudget").value,st=$("#fStore").value;
+  renderInv(INV.filter(u=>(!ty||u.type===ty)&&(!bu||(u.price&&u.price<=bu))&&(!st||u.store===st)));
+  document.getElementById("inv").scrollIntoView({behavior:"smooth"});
+};
+$$("[data-ftab]").forEach(b=>b.onclick=()=>{ftab=b.dataset.ftab;$$("[data-ftab]").forEach(x=>x.classList.toggle("on",x===b));$("#fGo").textContent={buy:"Show matches",rent:"Reserve a rental",service:"Book service",finance:"Start pre-qualifying"}[ftab];});
+$("#invGrid").addEventListener("click",e=>{const b=e.target.closest("[data-book-unit]");if(b){openBooking("demo",INV[+b.dataset.bookUnit]);return;}const a=e.target.closest("[data-ask-unit]");if(a){const u=INV[+a.dataset.askUnit];openChat(`Is the ${u.mk} ${u.model} "${u.pkg}" package still available at the ${u.store} store?`);}});
+$("#storePick").onchange=()=>{$("#fStore").value=$("#storePick").value;};
+
+/* ---------- Booking ---------- */
+const BK={
+ demo:{title:"Book a demo ride",who:"sales",slots:["9:00am","10:30am","1:00pm","3:30pm"],noun:"Demo ride"},
+ service:{title:"Book a service drop-off",who:"service",slots:["8:00am","9:00am","11:00am","1:30pm"],noun:"Service drop-off"},
+ rental:{title:"Reserve a rental pickup",who:"sales",slots:["8:00am","10:00am","12:00pm","2:00pm"],noun:"Rental pickup"},
+ finance:{title:"Pre-qualify, no SSN required",who:"finance",slots:["9:30am","11:00am","2:00pm","4:00pm"],noun:"Finance call"}
+};
+function nextDays(){const out=[];const d=new Date();while(out.length<5){d.setDate(d.getDate()+1);const w=d.getDay();if(w>0&&w<6)out.push(new Date(d));}return out;}
+function openBooking(kind,unit){
+  const k=BK[kind]||BK.demo, days=nextDays();
+  let store=unit?unit.store:$("#storePick").value||"Ocala", day=0, slot=null;
+  const sheet=$("#bkSheet");
+  const machineField=kind==="demo"?`<div class="field"><label for="bkUnit">Machine</label><select id="bkUnit">${INV.map((u,i)=>`<option value="${i}" ${unit===u?"selected":""}>${esc(u.mk+" "+u.model+" ("+u.pkg+")")}</option>`).join("")}</select></div>`:kind==="rental"?`<div class="field"><label for="bkUnit">Rental</label><select id="bkUnit"><option>TYM T130 utility tractor, $650/day</option><option>TYM T115 utility tractor, $545/day</option><option>Woods BS72.20 box scraper, $50/day</option></select></div>`:kind==="service"?`<div class="field"><label for="bkUnit">What needs work?</label><input id="bkUnit" placeholder="e.g. Gravely ZT won't start"></div>`:`<div class="field"><label for="bkUnit">What are you looking to finance?</label><input id="bkUnit" placeholder="e.g. TYM T474 package"></div>`;
+  sheet.innerHTML=`<div class="head"><div><h3 id="bkTitle">${k.title}</h3><p class="muted small" style="margin-top:4px">Pick a store and a time. You'll get a text confirmation.</p></div><button class="x" aria-label="Close" data-close>×</button></div>
+  <div class="field"><label for="bkStore">Store</label><select id="bkStore">${Object.keys(STORES).map(s=>`<option ${s===store?"selected":""}>${s}</option>`).join("")}</select></div>
+  ${machineField}
+  <div class="days" id="bkDays">${days.map((d,i)=>`<button class="day" aria-pressed="${i===0}" data-day="${i}"><small>${d.toLocaleDateString("en-US",{weekday:"short"})}</small><b>${d.getDate()}</b><small>${d.toLocaleDateString("en-US",{month:"short"})}</small></button>`).join("")}</div>
+  <div class="slots" id="bkSlots"></div>
+  <div class="field"><label for="bkName">First name</label><input id="bkName" autocomplete="given-name" placeholder="Sam"></div>
+  <div class="field"><label for="bkPhone">Mobile number</label><input id="bkPhone" autocomplete="tel" inputmode="tel" placeholder="352-555-0142"></div>
+  <p class="small muted" id="bkErr" style="margin-top:10px"></p>
+  <button class="btn btn-red" id="bkGo" style="width:100%;justify-content:center;margin-top:8px">Confirm ${k.noun.toLowerCase()}</button>`;
+  const slotsEl=$("#bkSlots");
+  function drawSlots(){slotsEl.innerHTML=k.slots.map((s,i)=>`<button class="chip" aria-pressed="${slot===s}" data-slot="${s}">${s}</button>`).join("");}
+  drawSlots();
+  sheet.onclick=e=>{
+    if(e.target.closest("[data-close]")){closeBooking();return;}
+    const d=e.target.closest("[data-day]");if(d){day=+d.dataset.day;$$("#bkDays .day").forEach(x=>x.setAttribute("aria-pressed",x===d));return;}
+    const s=e.target.closest("[data-slot]");if(s){slot=s.dataset.slot;drawSlots();return;}
+    if(e.target.id==="bkGo"){
+      store=$("#bkStore").value; const name=$("#bkName").value.trim();
+      if(!slot){$("#bkErr").textContent="Choose a time to continue.";return;}
+      if(!name){$("#bkErr").textContent="Add your first name so the store knows who's coming.";return;}
+      const S=STORES[store], owner=S[k.who]||S.sales, el=$("#bkUnit");
+      const what=el.tagName==="SELECT"?el.options[el.selectedIndex].text:(el.value||k.noun);
+      const when=days[day].toLocaleDateString("en-US",{weekday:"long",month:"short",day:"numeric"})+" at "+slot;
+      addLead({type:k.noun,store,owner,interest:what,detail:`${name} booked online`,slot:when,hot:kind==="demo"||kind==="finance"},"Website booking");
+      sheet.innerHTML=`<div class="confirm"><div class="check">✓</div><h3>${k.noun} booked</h3><p class="muted" style="margin-top:6px">${esc(name)}, you're set for ${esc(when)} at our ${esc(store)} store. A text confirmation is on its way.</p>
+      <div class="receipt"><div><span>What</span><b>${esc(what)}</b></div><div><span>Where</span><b>${esc(S.addr)}</b></div><div><span>Assigned to</span><b>${esc(owner)}</b></div><div><span>Logged in</span><b>Pipedrive, ${esc(store)} pipeline</b></div><div><span>Follow-up</span><b>Reminder text the day before</b></div></div>
+      <div style="display:flex;gap:10px;justify-content:center;margin-top:18px;flex-wrap:wrap"><button class="btn btn-red btn-sm" data-close>Done</button><a class="btn btn-ghost btn-sm" href="#/receptionist" data-close>See it in the pipeline</a></div></div>`;
+    }
+  };
+  $("#bookModal").classList.add("open"); setTimeout(()=>$("#bkStore").focus(),40);
+}
+function closeBooking(){$("#bookModal").classList.remove("open");}
+$("#bookModal").addEventListener("click",e=>{if(e.target.id==="bookModal")closeBooking();});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeBooking();$("#chatPanel").classList.remove("open");}});
+/* ---------- CRM tour ---------- */
+const SCREENS=[
+ {t:"New lead, already assigned",x:"Saturday at 6:15pm a buyer near Palatka chatted about a Solis H24 and financing. By the time Justin opens his phone, it's a deal in his pipeline with the full conversation attached.",w:"No lead sits in a voicemail box or a shared inbox over the weekend. Each one lands with the store and salesperson already set.",
+  h:`<p class="greet">New lead</p><p class="meta" style="font-size:12px;color:#5E666D">Assigned to Justin Boileau, Palatka</p>
+  <div class="pcard"><span class="pill r">Hot</span><span class="pill">Website chat</span><h5 style="margin-top:8px">Solis H24 "Weekend Workhorse"</h5><div class="meta">Dale M. · Interlachen, FL · 352-555-0187</div>
+  <div class="bubble-in">Looking for a tractor with a loader for 5 acres. Can I finance?</div><div class="bubble-out">The Solis H24 package is $29,893 cash. Emma can walk you through pre-qualifying, no SSN needed.</div>
+  <div style="margin-top:10px;display:flex;gap:6px"><span class="pill g">Finance interest</span><span class="pill y">Wants demo</span></div></div>`},
+ {t:"Monday morning, sorted",x:"John opens the app at 8am and sees what matters first: hot leads from the weekend, demo rides booked for today, and quotes going cold.",w:"Most equipment buyers shop two or three dealers. The first one to call back with an answer usually wins the deal.",
+  h:`<p style="font-size:12px;color:#5E666D;font-weight:700">Monday, Oct 12</p><p class="greet">Morning, John</p>
+  <div class="pcard"><h5>Call first</h5><div class="seq" style="margin-top:8px"><div class="s"><i>3</i><span>Hot weekend leads<br><small style="color:#5E666D">TYM T474, Massey 1E.35, Gravely Pro-Turn</small></span><b>Call</b></div></div></div>
+  <div class="pcard"><h5>On the lot today</h5><div class="seq"><div class="s"><i>✓</i><span>10:30am demo ride, TYM T474<br><small style="color:#5E666D">Booked online Sunday night</small></span><span class="pill g">Confirmed</span></div><div class="s"><i>✓</i><span>2:00pm, Solis H24 Plus pickup</span><span class="pill">Delivery</span></div></div></div>
+  <div class="pcard"><h5>Going cold</h5><div class="seq"><div class="s"><i class="p">!</i><span>4 quotes with no reply in 6+ days</span><span class="pill y">Nudge</span></div></div></div>`},
+ {t:"The whole story before you dial",x:"Every lead carries what the buyer already said: machine, acreage, trade-in, budget, financing and the times they picked. No starting over on the phone.",w:"Your salespeople sound prepared on the first call, and the buyer doesn't repeat themselves to a second person.",
+  h:`<p class="greet">Dale M.</p><p class="meta" style="font-size:12px;color:#5E666D">Palatka pipeline · Stage: Demo booked</p>
+  <div class="pcard"><div class="seq">
+   <div class="s"><i>✓</i><span>Interest</span><b>Solis H24 + loader</b></div>
+   <div class="s"><i>✓</i><span>Land</span><b>5 acres, pasture</b></div>
+   <div class="s"><i>✓</i><span>Trade-in</span><b>2014 Craftsman rider</b></div>
+   <div class="s"><i>✓</i><span>Budget</span><b>Around $30k</b></div>
+   <div class="s"><i>✓</i><span>Financing</span><b>Pre-qualify sent</b></div>
+   <div class="s"><i>✓</i><span>Demo</span><b>Tue 10:30am</b></div></div></div>
+  <div class="pcard"><h5>Next step</h5><div class="meta">Call Dale before his Tuesday demo · Emma to confirm pre-qualification</div></div>`},
+ {t:"Follow-up that runs itself",x:"If Dale doesn't buy on Tuesday, texts go out on day 1, 3 and 7 with the listing, the pre-qualify link and an offer to bring a box blade along. Replies come straight back to Justin.",w:"Nobody has to remember to follow up. The sequence stops the moment a salesperson replies or the deal closes.",
+  h:`<p class="greet">Follow-up</p><p class="meta" style="font-size:12px;color:#5E666D">Dale M. · Solis H24</p>
+  <div class="pcard"><div class="seq">
+   <div class="s"><i>✓</i><span><b>Day 1</b><br><small>“Thanks for coming out, Dale. Here's the H24 package and your pre-qualify link.”</small></span><span class="pill g">Sent</span></div>
+   <div class="s"><i>✓</i><span><b>Day 3</b><br><small>“Want us to hold the H24 for the weekend? Box blade can go with it.”</small></span><span class="pill g">Sent</span></div>
+   <div class="s"><i class="p">7</i><span><b>Day 7</b><br><small>“Justin here. Still thinking it over? Happy to answer anything.”</small></span><span class="pill">Scheduled</span></div></div></div>
+  <div class="bubble-in">Can you hold it till Saturday? I'll bring a check.</div>`},
+ {t:"Booked from a text",x:"The buyer taps a time in the text. It lands on the Palatka calendar with the machine and notes, and the lot porter gets it on the ready line.",w:"No phone tag. The demo is on the calendar before your team even sees the message.",
+  h:`<p class="greet">Calendar</p><p class="meta" style="font-size:12px;color:#5E666D">Palatka · Tuesday</p>
+  <div class="pcard"><div class="seq">
+   <div class="s"><i class="p">9</i><span>9:00am, service drop-off<br><small>Gravely ZT X 52, blade noise</small></span><span class="pill">Service</span></div>
+   <div class="s"><i>✓</i><span>10:30am, demo ride<br><small>Dale M., Solis H24, booked by text</small></span><span class="pill r">New</span></div>
+   <div class="s"><i class="p">1</i><span>1:00pm, rental pickup<br><small>TYM T115, 2 days</small></span><span class="pill g">Rental</span></div>
+   <div class="s"><i class="p">3</i><span>3:30pm, finance call<br><small>Emma Nettles, pre-qualify</small></span><span class="pill">Finance</span></div></div></div>`},
+ {t:"Service bay to sales floor",x:"A 2017 mower comes in for a $1,400 repair. Pipedrive flags it for a salesperson with a trade-in estimate and the matching new model.",w:"Your service department sees more buyers than your showroom does. Now each one gets a chance to upgrade.",
+  h:`<p class="greet">Upgrade flag</p><p class="meta" style="font-size:12px;color:#5E666D">From service · Ocala</p>
+  <div class="pcard"><span class="pill y">Service to sales</span><h5 style="margin-top:8px">Linda R. · 2017 zero-turn</h5><div class="meta">Repair estimate $1,400 · 9 years old</div>
+  <div class="seq" style="margin-top:10px"><div class="s"><i>✓</i><span>Suggested</span><b>Gravely ZT XL 42</b></div><div class="s"><i>✓</i><span>Package price</span><b>$7,948</b></div><div class="s"><i>✓</i><span>Owner</span><b>Shayne Emerson</b></div></div></div>
+  <div class="bubble-out">Linda, before you put $1,400 into it, want to see what a new ZT XL 42 runs with your trade?</div>`},
+ {t:"Rental to purchase",x:"A contractor has rented the TYM T130 twice this year. On the second return, Pipedrive offers to put part of the rental cost toward buying one.",w:"Repeat renters are buyers who haven't been asked yet. This asks them automatically.",
+  h:`<p class="greet">Rental buyer</p><p class="meta" style="font-size:12px;color:#5E666D">Ocala · Michael Farr</p>
+  <div class="pcard"><span class="pill g">Rented 2× this year</span><h5 style="margin-top:8px">Carlos V. · Site prep contractor</h5><div class="meta">TYM T130 · $4,000 in rentals since March</div></div>
+  <div class="bubble-out">Carlos, you've rented the T130 twice now. Want to see what owning one looks like with your rentals put toward it?</div><div class="bubble-in">Yeah, send me numbers.</div>
+  <div class="pcard"><div class="meta">Moved to: Quote requested · Michael notified</div></div>`},
+ {t:"All three stores, one view",x:"The manager view shows leads, first-reply time, demos booked and deals closed for Ocala, Palatka and Eustis side by side.",w:"You can see which store needs help this week without asking anyone for a report.",
+  h:`<p class="greet">All stores</p><p class="meta" style="font-size:12px;color:#5E666D">This week · example</p>
+  <div class="storecols"><div><small>Ocala</small><b>34</b><small>leads</small></div><div><small>Palatka</small><b>19</b><small>leads</small></div><div><small>Eustis</small><b>12</b><small>leads</small></div></div>
+  <div class="pcard"><div class="seq"><div class="s"><i>✓</i><span>First reply</span><b>1 min avg</b></div><div class="s"><i>✓</i><span>Demos booked</span><b>14</b></div><div class="s"><i>✓</i><span>Follow-ups sent</span><b>100%</b></div><div class="s"><i class="p">!</i><span>Eustis quotes unanswered</span><b>3</b></div></div></div>`}
+];
+let crmI=0, crmTimer=null;
+SCREENS.forEach((s,i)=>{const c=document.createElement("button");c.className="chip";c.textContent=s.t.split(",")[0];c.onclick=()=>showScreen(i);$("#crmJump").appendChild(c);});
+function showScreen(i){crmI=(i+SCREENS.length)%SCREENS.length;const s=SCREENS[crmI];$("#crmStep").textContent=(crmI+1)+" of "+SCREENS.length;$("#crmTitle").textContent=s.t;$("#crmText").textContent=s.x;$("#crmWhy").textContent=s.w;$("#pdBody").innerHTML=s.h;$$("#crmJump .chip").forEach((c,j)=>c.setAttribute("aria-pressed",j===crmI));}
+$("#crmNext").onclick=()=>showScreen(crmI+1);$("#crmPrev").onclick=()=>showScreen(crmI-1);
+function ping(){const p=$("#push");const leads=[["New lead, Eustis","Bad Boy MZ Magnum 48\" · demo request · from website"],["New lead, Ocala","TYM T474 · after-hours call · wants Saturday demo"],["New lead, Palatka","Solis H24 · wants financing · from Saturday chat"]];const l=leads[Math.floor(Math.random()*leads.length)];$("#pushT").textContent=l[0];$("#pushB").textContent=l[1];p.classList.add("show");setTimeout(()=>p.classList.remove("show"),3200);}
+$("#crmPing").onclick=ping;
+function crmStart(){showScreen(crmI);clearTimeout(crmTimer);crmTimer=setTimeout(ping,1600);}
+function crmStop(){clearTimeout(crmTimer);}
+
+/* ---------- Dashboard ---------- */
+let dv="today";
+const KPIS=[
+ {l:"After-hours calls answered",t:["Unknown","Not measured today",8],g:["100%","AI receptionist, all 3 stores",100]},
+ {l:"First reply to a web lead",t:["Next day","Forms wait for a callback",10],g:["< 2 min","Chat and instant text reply",95]},
+ {l:"Chat on the website",t:["None","No chat or text option",0],g:["24/7","Every page, every store",100]},
+ {l:"Stores in one pipeline",t:["0 of 3","Leads arrive in one inbox",5],g:["3 of 3","Routed to a named person",100]},
+ {l:"Demos booked online",t:["0","Schedule Demo is a form",0],g:["Tracked","Real slots, each store",80]},
+ {l:"Leads followed up",t:["Not tracked","Depends on who remembers",5],g:["100%","Day 1, 3 and 7 texts",100]},
+ {l:"Service booked online",t:["0","Service Request is a form",0],g:["Tracked","Drop-off slots by store",80]},
+ {l:"Google reviews, 3 stores",t:["Checking","Baseline measured in week one",30],g:["+20%","Review request after every sale",75]}
+];
+const SPEED=[
+ ["Phone, after hours","Voicemail or no answer",100,"Answered live, 24/7",4],
+ ["Website form","Next business day",90,"Instant text reply",6],
+ ["Schedule Demo request","Callback to confirm",80,"Booked on calendar",3],
+ ["Service request","Callback to confirm",80,"Booked on calendar",3],
+ ["Facebook message","Unknown",60,"Under 5 minutes",14],
+ ["Rental inquiry","Next business day",90,"Answered with rates",4],
+ ["Finance pre-qualify","Next business day",85,"Same-day call booked",12]
+];
+function lineChart(id,from,to,label,unit){
+  const svg=$(id),W=420,H=200,pad=34,pts=13;
+  let s=`<line x1="${pad}" y1="${H-pad}" x2="${W-8}" y2="${H-pad}" stroke="var(--line)"/>`;
+  [0,.5,1].forEach(f=>{const y=H-pad-(H-pad-14)*f;s+=`<text x="2" y="${y+4}" font-size="11" fill="var(--muted)">${Math.round(to*f)}${unit}</text><line x1="${pad}" y1="${y}" x2="${W-8}" y2="${y}" stroke="var(--line)" stroke-dasharray="2 4"/>`;});
+  s+=`<rect x="${pad}" y="14" width="${W-pad-8}" height="${(H-pad-14)*0.12}" fill="var(--red-tint)"/><text x="${W-60}" y="30" font-size="11" font-weight="700" fill="var(--red)">TARGET</text>`;
+  const X=i=>pad+(W-pad-8)*i/(pts-1), Y=v=>H-pad-(H-pad-14)*v/to;
+  if(dv==="target"){let d="";for(let i=0;i<pts;i++){const v=from+(to*0.94-from)*(1-Math.pow(1-i/(pts-1),2));d+=(i?"L":"M")+X(i)+","+Y(v);}s+=`<path d="${d}" fill="none" stroke="var(--red)" stroke-width="2.5" stroke-dasharray="6 5"/><circle cx="${X(pts-1)}" cy="${Y(to*0.94)}" r="5" fill="var(--red)"/>`;}
+  s+=`<circle cx="${X(0)}" cy="${Y(from)}" r="5" fill="var(--muted)"/><text x="${X(0)+8}" y="${Y(from)-8}" font-size="12" font-weight="700" fill="var(--ink)">${label}</text>`;
+  ["Today","Week 4","Week 8","Day 90"].forEach((t,i)=>{s+=`<text x="${pad+(W-pad-40)*i/3}" y="${H-12}" font-size="11" fill="var(--muted)">${t}</text>`;});
+  svg.innerHTML=s;
+}
+function barChart(id,vals,labels){
+  const svg=$(id),W=300,H=180,max=Math.max(...vals.flat(),1);let s="";
+  labels.forEach((l,i)=>{const x=24+i*92,h=v=>(H-46)*v/max;const t=vals[0][i],g=vals[1][i];
+   s+=`<rect x="${x}" y="${H-28-h(t)}" width="26" height="${Math.max(h(t),3)}" rx="4" fill="var(--muted)"/>`;
+   if(dv==="target") s+=`<rect x="${x+30}" y="${H-28-h(g)}" width="26" height="${h(g)}" rx="4" fill="var(--red)"/><text x="${x+43}" y="${H-34-h(g)}" font-size="12" font-weight="700" text-anchor="middle" fill="var(--ink)">${g}</text>`;
+   s+=`<text x="${x+28}" y="${H-10}" font-size="12" text-anchor="middle" fill="var(--muted)">${l}</text>`;});
+  svg.innerHTML=s;
+}
+function renderDash(){
+  const T=dv==="target";
+  $("#dBanner").className="banner"+(T?" t":"");
+  $("#dBanner").textContent=T?"Showing day 90 targets. Goals, not results.":"Showing today's baseline, checked October 2026 from your website and listings.";
+  $("#kpis").innerHTML=KPIS.map(k=>{const v=T?k.g:k.t;return `<div class="kpi ${T?"tgt":""}"><div class="lab"><span>${k.l}</span><span class="tag ${T?"red":""}">${T?"Target":"Today"}</span></div><div class="val">${v[0]}</div><div class="sub">${v[1]}</div><div class="bar"><i style="width:${v[2]}%"></i></div></div>`;}).join("");
+  $("#speedRows").innerHTML=SPEED.map(r=>`<tr><td><b>${r[0]}</b></td><td><span class="tag">${r[1]}</span></td><td><span class="tag red">${r[3]}</span></td><td><div class="track"><span class="zone"></span><span class="dot" style="left:${r[2]}%"></span>${T?`<span class="dot t" style="left:${r[4]}%"></span>`:""}</div></td></tr>`).join("");
+  lineChart("#ch1",0,60,T?"Starts week 1":"Not counted today","");
+  lineChart("#ch2",0,100,T?"0% today":"Not tracked today","%");
+  barChart("#ch3",[[1,1,1],[34,19,12]],["Ocala","Palatka","Eustis"]);
+  barChart("#ch4",[[0,0,0],[30,16,10]],["Ocala","Palatka","Eustis"]);
+  $("#shopRows").innerHTML=[["Ocala Tractor",T?"Under 1 min":"Measured week 1",T],["Connor Tractor","Measured week 1"],["Highland Tractor","Measured week 1"],["Crystal Tractor","Measured week 1"]].map(r=>`<div class="e"><b>${r[0]}</b><span class="tag ${r[2]?"red":""}">${r[1]}</span></div>`).join("");
+  $("#logRows").innerHTML=[["Oct 05","AI receptionist live on all 3 lines","After 5pm, weekends and holidays","Calls"],["Oct 07","Search descriptions fixed","Current brands, Eustis link corrected","Website"],["Oct 12","Chat live on every page","Including all package and inventory pages","Chat"],["Oct 14","Online booking switched on","Demo, service, rental and finance, by store","Booking"],["Oct 19","Pipedrive pipeline for 3 stores","Routing to John, Justin and Mark","CRM"],["Oct 21","Day 1, 3, 7 follow-up texts on","Every new lead, every channel","Follow-up"],["Oct 28","Pre-season service campaign sent","To customers who opted in","Campaigns"]].map(e=>`<div class="e"><span class="d">${e[0]}</span><div><b>${e[1]}</b><span class="muted">${e[2]}</span></div><span class="tag">${e[3]}</span></div>`).join("");
+  $("#scoreRows").innerHTML=[["Calls answered after 5pm and weekends","Answered by the AI receptionist","Unknown","100%"],["Missed-call text-back","Every missed call gets a text in a minute","Not set up","Under 1 min"],["Rental-to-purchase offers","Sent after a second rental","Not tracked","Every repeat renter"],["Service-to-sales upgrade flags","Older machines in for repair","Not tracked","Counted monthly"],["Review requests after a sale","Google link to the right store","Manual","Every sale"]].map(r=>`<div class="e"><div><b>${r[0]}</b><span class="muted">${r[1]}</span></div><span class="tag ${T?"red":""}" style="white-space:nowrap;align-self:center">${T?r[3]:r[2]}</span></div>`).join("");
+}
+$$("[data-dv]").forEach(b=>b.onclick=()=>{dv=b.dataset.dv;$$("[data-dv]").forEach(x=>x.setAttribute("aria-pressed",x===b));renderDash();});
+renderDash();
+/* ---------- Sliders helper ---------- */
+function slider(host,cfg,onChange){
+  const id="s_"+cfg.k;const w=document.createElement("div");w.className="slider";
+  w.innerHTML=`<label for="${id}"><span>${cfg.l}</span><output id="${id}_o"></output></label><input type="range" id="${id}" min="${cfg.min}" max="${cfg.max}" step="${cfg.step}" value="${cfg.v}">`;
+  host.appendChild(w);const inp=$("input",w),o=$("output",w);
+  const fmt=v=>cfg.f==="$"?money(v):cfg.f==="%"?v+"%":(+v).toLocaleString("en-US");
+  const up=()=>{o.textContent=fmt(inp.value);onChange();};inp.addEventListener("input",up);o.textContent=fmt(inp.value);
+  return ()=>+inp.value;
+}
+/* ROI */
+const R={};const roiHost=$("#roiInputs");
+[["deal","Average equipment deal",3000,40000,500,12000,"$"],["close","Your close rate on a real lead",5,40,1,12,"%"],["calls","After-hours sales calls a week, all stores",0,40,1,6,""],["callLead","Share that become real leads",10,90,5,50,"%"],["web","Website leads a month",0,200,5,40,""],["lift","Close-rate lift from replying in minutes",0,10,1,2,"%"],["quotes","Open quotes a month",0,120,5,30,""],["recover","Quotes recovered by follow-up",0,20,1,4,"%"],["svc","Extra service tickets a month",0,80,1,20,""],["ticket","Average service ticket",100,1500,25,300,"$"]].forEach(a=>{R[a[0]]=slider(roiHost,{k:a[0],l:a[1],min:a[2],max:a[3],step:a[4],v:a[5],f:a[6]},calcROI);});
+const note=document.createElement("p");note.className="small muted";note.textContent="Starting points are conservative for a three-store dealer. Correct any of them with what you see in your books.";roiHost.appendChild(note);
+function calcROI(){
+  if(!R.svc) return;
+  const r1=R.calls()*4.33*R.callLead()/100*R.close()/100*R.deal();
+  const r2=R.web()*R.lift()/100*R.deal();
+  const r3=R.quotes()*R.recover()/100*R.deal();
+  const r4=R.svc()*R.ticket();
+  const m=r1+r2+r3+r4;
+  $("#r1").textContent=money(r1);$("#r2").textContent=money(r2);$("#r3").textContent=money(r3);$("#r4").textContent=money(r4);
+  $("#roiYear").textContent=money(m*10.5);
+  $("#roiSub").textContent=money(m)+" a month at full speed, about "+Math.round((r1+r2+r3)/R.deal())+" extra equipment deals and "+R.svc()+" extra service tickets a month.";
+}
+calcROI();
+
+/* Past customers */
+const P={};let lv=1;const pcHost=$("#pcInputs");
+[["list","Past customers on file",500,10000,100,2500,""],["ticket","Average service ticket",100,1500,25,300,"$"],["sale","Average equipment sale",3000,40000,500,12000,"$"],["ad","Ad cost per sale today",50,1500,25,400,"$"]].forEach(a=>{P[a[0]]=slider(pcHost,{k:"pc"+a[0],l:a[1],min:a[2],max:a[3],step:a[4],v:a[5],f:a[6]},calcPC);});
+pcHost.appendChild(pcHost.firstElementChild); // move "How well it lands" to the bottom
+const CAMPS=[
+ {k:"season",c:"#C21F26",tag:"Pre-season service",h:"“Get ahead of mowing season”",f:"2× a year, everyone with a machine",n:"<small>OCALA TRACTOR · NOW</small><b>Mowing season is 6 weeks out</b><br>Hi Linda, want us to service your Gravely before the rush?<span class='b'>Pick a time</span>",calc:()=>P.list()*2*0.06*P.ticket(),jobs:()=>P.list()*2*0.06},
+ {k:"upgrade",c:"#2F6B45",tag:"Service to upgrade",h:"Before you fix it, see new",f:"Machines 6+ years old in for repair",n:"<small>OCALA TRACTOR · NOW</small><b>Your repair estimate is ready</b><br>It's $1,400. A new ZT XL 42 is $7,948 with your trade. Want both numbers?<span class='b'>See options</span>",calc:()=>P.list()*0.005*P.sale(),jobs:()=>P.list()*0.005},
+ {k:"rental",c:"#E7B13F",tag:"Rental to purchase",h:"Own the one you keep renting",f:"After a second rental",n:"<small>OCALA TRACTOR · NOW</small><b>You've rented the T130 twice</b><br>Want us to put your rentals toward owning one?<span class='b'>Send me numbers</span>",calc:()=>P.list()*0.004*P.sale(),jobs:()=>P.list()*0.004},
+ {k:"implement",c:"#7A8E9A",tag:"Implement add-ons",h:"The right tool for this season",f:"3 to 6 months after a tractor sale",n:"<small>OCALA TRACTOR · NOW</small><b>Getting the most from your TYM?</b><br>Box blade or grapple for fall clean-up? Fits your T474.<span class='b'>Show me</span>",calc:()=>P.list()*0.02*2000,jobs:()=>P.list()*0.02},
+ {k:"refer",c:"#B07AD6",tag:"Review and refer",h:"Every sale brings the next",f:"After every sale and service",n:"<small>OCALA TRACTOR · NOW</small><b>How's the new mower, Sam?</b><br>A Google review helps a family business a lot. Refer a neighbor and you both get $50 off service.<span class='b'>Leave a review</span>",calc:()=>P.list()*0.002*P.sale(),jobs:()=>P.list()*0.002}
+];
+const ON={};CAMPS.forEach(c=>ON[c.k]=true);
+$("#camps").innerHTML=CAMPS.map(c=>`<article class="camp" id="camp-${c.k}"><div class="ph"><div class="notif">${c.n}</div></div><div class="bd"><span style="font-size:13px;font-weight:700;display:inline-flex;gap:6px;align-items:center"><i style="width:10px;height:10px;border-radius:3px;background:${c.c};display:inline-block"></i>${c.tag}</span><h4>${c.h}</h4><span class="freq">${c.f}</span><div class="ft"><b id="cv-${c.k}">$0</b><button class="sw" role="switch" aria-checked="true" aria-label="${c.tag} on or off" data-camp="${c.k}"></button></div></div></article>`).join("");
+$("#camps").addEventListener("click",e=>{const b=e.target.closest("[data-camp]");if(!b)return;const k=b.dataset.camp;ON[k]=!ON[k];b.setAttribute("aria-checked",ON[k]);$("#camp-"+k).classList.toggle("off",!ON[k]);calcPC();});
+$$("[data-lv]").forEach(b=>b.onclick=()=>{lv=+b.dataset.lv;$$("[data-lv]").forEach(x=>x.setAttribute("aria-pressed",x===b));calcPC();});
+function calcPC(){
+  if(!P.ad) return; let tot=0,jobs=0,sales=0;const parts=[];
+  CAMPS.forEach(c=>{const v=c.calc()*lv,j=c.jobs()*lv;$("#cv-"+c.k).textContent=money(v);if(ON[c.k]){tot+=v;jobs+=j;if(c.k!=="season")sales+=j;parts.push([c,v]);}});
+  $("#pcTotal").textContent=money(tot);$("#pcJobs").textContent=Math.round(jobs/12);$("#pcAds").textContent=money(sales*P.ad());
+  $("#pcStack").innerHTML=parts.map(([c,v])=>`<i style="width:${tot?v/tot*100:0}%;background:${c.c}"></i>`).join("");
+  $("#pcLegend").innerHTML=parts.map(([c])=>`<span><i style="background:${c.c}"></i>${c.tag}</span>`).join("");
+}
+calcPC();
+
+route();
+})();
+</script>
+</body>
+</html>
